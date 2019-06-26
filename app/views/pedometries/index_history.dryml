@@ -1,0 +1,271 @@
+<page title="#{ht 'pedometry.index.title', :default=>[model.model_name.human(:count=>100)] }">
+  <body: class="index-page pedometry" />
+  <custom-stylesheets:> 
+      <animal-stylesheet/>
+  </custom-stylesheets:>
+  <content-header: >
+   
+  </content-header:>
+
+  <content-body: style="margin:0px 0px 0px 0px ">
+    <div class="conteinerTitle">   
+      <div class="title tidtleBoxLarge"><t key="pedometry.index_history.title"  default="History Pedometry" /></div>
+    </div>
+
+    <div class="mobilClear"></div>
+
+    <div class="left1" style="text-align:center;">
+
+      <% 
+      charset = %w{1 2 3 4 6 7 9 a b c d e f g h i j k l m n o p q r s t u v w x y z} 
+         @rndfile = (0...12).map{ charset.to_a[rand(charset.size)] }.join    
+      %>
+    
+      <a href="/pedometries/export_history?rndfile=#{@rndfile}&eartag=#{@eartag}">
+        <div class="containerImg1 img-exel">
+        </div>
+        <div class="info info-exel">
+          Excel
+        </div>
+      </a>
+    </div>
+
+    <div class="clean"/>
+
+
+    <br/>
+    <div class="boxLarge boxLargeA">        
+      <div class="boxSmall boxSmallA" style="margin:0px 0px 0px 0px">
+        <div class="pad">
+          <div class="eartag">         
+            <div class="padEartag" style="color:black">
+                <%= @eartag %>
+            </div>  
+          </div>
+        </div>
+      </div>            
+      <div class="boxSmall boxSmallA" style="height:100px;width:148px;color:#6FB896"> 
+        <div class="padName">
+          <%= @name %>
+        </div>
+        <img src="/assets/picture.png" class="conteinerPicture"/>
+      </div>       
+    </div>
+    <div class="mobilClear"/>  
+        
+    <div class="values">
+      <p id="title"><t key="pedometry.index_history.detail.steps" default="Date"/></p>
+      
+      <p id="detail"><%= @avgs.steps  %></p>       
+    </div>
+
+    <div class="values" style="width:130px;">
+      <p id="title"><t key="pedometry.index_history.detail.lying" default="Values"/></p>
+      
+      <p id="detail"><%= @avgs.lying %> min.</p>
+    </div>
+
+    <div class="values" style="width:130px;">
+      <p id="title"><t key="pedometry.index_history.detail.walking" default="Values"/></p>
+      
+      <p id="detail"><%= @avgs.walking %> min.</p>
+    </div>
+
+    <div class="values" style="width:130px;">
+      <p id="title"><t key="pedometry.index_history.detail.standing" default="Values"/></p>
+      
+      <p id="detail"><%= @avgs.standing%>min.</p>
+    </div>
+    
+    
+    
+    <div class="clean"/>
+
+      <table class="table table-hover" >
+        <tr>
+          <th><t key="pedometry.index.table.date" default="Date"/></th>
+          <th><t key="pedometry.index.table.batery" default="Batery"/></th>
+          <th><t key="pedometry.index.table.steps" default="Steps"/></th>
+          <th><t key="pedometry.index.table.lying_time" default="Lying time"/></th> 
+          <th><t key="pedometry.index.table.walking_time" default="Walking time"/></th>
+          <th><t key="pedometry.index.table.standing_time" default="Standing time"/></th>        
+        </tr>            
+          <% @table_history.each do |th| %>           
+            <tr class="linkrow" onclick="">                        
+              <td id="value"> <%= th.dated_at %> </td>
+              <td id="value"> <%= th.battery %> </td>
+              <td id="value"> <%= th.steps_number %> </td>
+              <td id="value"> <%= th.lying_time %> </td>
+              <td id="value"> <%= th.walking_time %> </td>
+              <td id="value"> <%= th.standing_time %> </td>
+            </tr> 
+          <% end %>            
+      </table>
+
+      <br/>
+      <br/>
+      <br/>
+
+      <div >             
+        <div >
+            <div>
+                <div class="conteinerGraphic" id='container'/>
+            </div>
+            <div>
+                <p id='choices'></p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+     $(function () {
+        var chart;
+        $(document).ready(function() {
+            chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container',
+                    zoomType: 'xy'
+                },
+                title: {
+                    text: '<%= t :key=>'pedometry.index_history.graphic.title', :default=>'Pedometry history' %>'
+                },
+                subtitle: {
+                    text: '<%= t :key=>'pedometry.index_history.graphic.sub_title', :default=>'hostory per animal' %>'
+                },
+                xAxis: [{
+                    categories:  <%= @time_round %>
+                }],
+                yAxis: [{ // Primary yAxis
+                    labels: {
+                        formatter: function() {
+                            return this.value +'.';
+                        },
+                        style: {
+                            color: '#380F00'
+                        }
+                    },
+                    title: {
+                        text: '<%= t :key=>'pedometry.index.table.lying_time', :default=>'Steps' %>',
+                        style: {
+                            color: '#380F00'
+                        }
+                    },
+                    opposite: true
+        
+                }, { // Secondary yAxis
+                    gridLineWidth: 0,
+                    title: {
+                        text: '<%= t :key=>'pedometry.index.table.steps', :default=>'Lying' %>',
+                        style: {
+                            color: '#6FB896'
+                        }
+                    },
+                    labels: {
+                        formatter: function() {
+                            return this.value +' steps';
+                        },
+                        style: {
+                            color: '#6FB896'
+                        }
+                    }
+        
+                }, 
+                  
+                 { // Tertiary yAxis
+                    gridLineWidth: 0,
+                    title: {
+                        text: '<%= t :key=>'pedometry.index.table.walking_time', :default=>'Walking' %>',
+                        style: {
+                            color: '#EC6608'
+                        }
+                    },
+                    labels: {
+                        formatter: function() {
+                            return this.value +' .';
+                        },
+                        style: {
+                            color: '#EC6608'
+                        }
+                    },
+                    opposite: true
+                },{ 
+                    gridLineWidth: 0,
+                    title: {
+                        text: '<%= t :key=>'pedometry.index.table.standing_time', :default=>'Standing' %>',
+                        style: {
+                            color: '#84A225'
+                        }
+                    },
+                    labels: {
+                        formatter: function() {
+                            return this.value +' .';
+                        },
+                        style: {
+                            color: '#84A225'
+                        }
+                    } 
+                }],
+                tooltip: {
+                    formatter: function() {
+                        var unit = {
+                            'Pasos': ' pasos.',
+                            'Tiempo caminando': 'Min.',
+                            'Tiempo acostada': 'Min.',
+                            'Tiempo parada': 'Min'
+                        }[this.series.name];
+        
+                        return ''+
+                            this.x +': '+ this.y +' '+ unit;
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'left',
+                    x: 80,
+                    verticalAlign: 'top',
+                    y: 10,
+                    floating: true,
+                    backgroundColor: '#FFFFFF'
+                },
+                series: [{
+                    name: '<%= t :key=>'pedometry.index.table.steps', :default=>'Steps' %>',
+                    color: '#6FB896',
+                    type: 'area',
+                    yAxis: 1,
+                    data: <%= @steps_data_round %>
+        
+                }, {
+                    name: '<%= t :key=>'pedometry.index.table.walking_time', :default=>'Walking' %>',
+                    type: 'spline',
+                    color: '#EC6608',
+                    yAxis: 2,
+                    data: <%= @walking_data_round %>,
+                    dashStyle: 'shortdot'
+        
+                }
+                , {
+                    name: '<%= t :key=>'pedometry.index.table.lying_time', :default=>'Lying' %>',
+                    color: '#380F00',
+                    type: 'spline',
+                    data: <%= @lying_data_round %>
+                    }
+                    , {
+                    name: '<%= t :key=>'pedometry.index.table.standing_time', :default=>'Standing' %>',
+                    color: '#89A54E',
+                    type: 'spline',
+                    yAxis: 3,
+                    data: <%= @standing_data_round %> 
+                    }
+
+                ]
+            });
+        });
+        
+    });
+    </script>  
+
+
+  </content-body:>
+</page>

@@ -1,0 +1,46 @@
+<page title="#{ht 'alarm.edit.title', :default=>['Edit Alarm'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page alarm" />
+
+    <content-header: >
+      <br/>
+      <div class="title"><t key="alarm.edit.title" default="Edit Alarm"/></div>
+      <delete-button label="#{ht 'alarm.actions.delete', :default=>['Remove This Alarm']}" />
+    </content-header:>
+
+    <content-body: >
+      <form class="default" style="color:black">
+        <field-list fields="name, description, status" >
+          <name-label:>
+          </name-label:>
+          <name-view:>
+            <div class="line"><t key="alarm.new.name" default="- Name:"/></div>
+            <input  />
+              <br/>
+              <br/>
+              <br/>
+          </name-view:>
+          <description-label:>
+          </description-label:>
+          <description-view:>
+            <div class="line"><t key="alarm.new.description" default="- Description:"/></div>
+            <input  />
+              <br/>
+              <br/>
+              <br/>
+          </description-view:>
+          <status-label:>
+          </status-label:>          
+          <status-view:>
+            <div class="line"><t key="alarm.new.status" default="- Status:"/></div>
+            <input  />
+            <br/>
+          </status-view:>
+        </field-list>
+        <div class="actions">
+            <submit label="#{ht 'alarm.actions.save', :default=>['Save']}" /><or-cancel class="cancel"/>
+        </div>
+      </form>
+     
+    </content-body:>
+  </page>

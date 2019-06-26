@@ -1,0 +1,35 @@
+<page  title="Unknown eartag">
+
+  <body: />
+  
+  <content-body: style="margin:0px 0px 0px 5px">
+    <div class="title"><t key="animalMilking.editEartag.title" default="Note: No animals were found in the database. Click Here"/></div>
+    <br/>
+    <div>
+      <div class="textMedium" style="color:black;float:left">
+        <t key="animalMilking.editEartag.current_eartag" default="Current eartag"/>      
+      </div>
+      <div style="float:left;font-size:30px;color:red;margin:0px 0px 0px 25px">
+        #{@unknown_eartag}
+      </div>
+    </div>
+    <div class="clean"/>
+    <br/>
+    <br/>
+    <div class="textMedium" style="color:black;float:left">
+        <t key="animalMilking.editEartag.new_eartag" default="Correct eartag"/>      
+    </div>
+    
+    <form class="default">
+      <error-messages/>
+        <field-list fields="eartag"/>
+        <div class="actions">
+        <submit label="#{ht 'animal_milking.actions.save', :default=>['Save']}" /><or-cancel class="cancel"/>
+      </div>
+    </form>
+    
+
+      
+    
+  </content-body:>
+</page>

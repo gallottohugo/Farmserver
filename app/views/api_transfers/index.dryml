@@ -1,0 +1,31 @@
+<page title="#{ht 'api_transfer.index.title', :default=>[model.model_name.human(:count=>100)] }">
+
+ 
+  <body: class="index-page api-transfer"/>
+    <content-body: style="margin:0px 0px 0px 0px">   
+      <div class="title" style="float:left;" ><t key="apiTransfer.title" default="System Log"/></div>   
+      <br/>
+      <br/>
+      <table class="table table-hover" >
+        <tr>
+          <th id="small"><t key="apiTransfer.index.table.type" default="Process type"/></th>
+          <th id="small"><t key="apiTransfer.index.table.name" default="Name"/></th>
+          <th id="small"><t key="apiTransfer.index.table.date" default="Date"/></th>
+          <th id="small"><t key="apiTransfer.index.table.result" default="Result"/></th> 
+          <th id="small"><t key="apiTransfer.index.table.code" default="Code"/></th>
+          <th id="small"><t key="apiTransfer.index.table.error" default="Error"/></th>        
+        </tr>
+        <% @transfer.each do |t| %>
+        <tr>            
+          <td id="value"><%= t.process_type %></td>
+          <td id="value"><%= t.process_name %></td>
+          <td id="value"><%= t.date_at %></td>
+          <td id="value"><%= t.result %></td>
+          <td id="value"><%= t.code_error%></td>
+          <td id="value"><%= t.error%></td> 
+        </tr>
+        <% end %>
+      </table>
+    
+  </content-body:>
+</page>

@@ -1,0 +1,450 @@
+en_US:
+  activerecord:
+    attributes:
+      pedometer:
+        code: "Code"
+        comments: "Comments"
+        animal: "Animal"
+
+  animal/species_types:
+    cow: "Cattle (Cow)"
+    goat: "Goat"
+    zebu: "Cattle (Zebu)"
+    buffalo: "Buffalo"
+    sheep: "Sheep"
+    camel: "Camel (Bactracian)"
+    llama: "Llama"
+    alpaca: "Alpaca"
+    hog: "Hog"
+    horse: "Horse"
+
+
+  tambero_api/language:
+    es_AR: "Spanish"
+    en_US: "English"
+
+  nav:
+    item:
+      home: "Home"
+      animals: "Animals"
+      milking_controls: "Milking Controls"
+      tambero_api: "Settings"
+      milking_session: "Milking Sessions"
+      milking_machine: "Milking Machines"
+      api_transfer: "Log"
+      pedometry: "Pedometry"
+      weighing: "Weighing"
+      alarm: "Alarms"
+
+  front:
+    title: "Summary view"
+    error:
+      tambero: "Warning: No se encontro configuración con Tambero.com. Pulse Aquí"
+      milking_machine: "Warning: There are no milking meters defined in the system. Press here."
+      version: "Atención: Existe una nueva versión del sistema. Pulse Aquí"
+      animals: "Warning: There are no animals in the database. Press here. "
+      connexion: "Atención: Pasaron la siguiente cantidad de dias sin conexión con Tambero.com:"
+    milking: 
+      title: "Milkings"
+      detail: "Registered milkings"
+    animals:
+      title: "Animals"
+      detail: "Registered animals"
+    meters:  "Meters"
+    tambero: "Managed from Tambero.com"
+    separator: "Milking Machine Meters"
+    currentState:
+      title: "Current Status"
+      duration: "Session duration"
+      animals: "Number of animals"
+      time_animal: "Minutes per animals"
+      total: "Total Kilograms"
+      avg: "Average Kilograms"
+    previousState:
+      duration: "Previous average:"
+      animals: "Previous average:"
+      time_animal: "Previous average:"
+      total: "Previous average:"
+      avg: "Previous average:"
+    meter:
+      number: "Number:"
+      temperature: "Temperature"
+      eartag: "Eartag"
+
+  animals:
+    index:
+      note: "Note: No animals were found in the database. Click Here"
+      title: "Active animals"
+      title1: "Inactive animals"
+      search: "Search by RP number"
+      search_title: "Result"
+      table:
+        eartag: "Eartag"
+        milking: "In Milking"
+        pedometer: "Assigned  pedometer"
+        name: "Name"
+        breed: "Breed"
+        detail: "Detail"
+        view: "View details"
+    index_inactive:
+      note: "No animals were found in the database"
+    show:
+      title: "Animal milking detail"
+      separator_graphic: "Milking chart"
+      details:
+        date: "Date"
+        values: "Values"
+        btn_table: "View table"
+        btn_chart: "View chart"
+      showtable: "View in table"
+      tambero: "Managed from Tambero.com"
+      separatorAnimal: "Details of animal"
+      separatorMilking: "Detatils of last milking"
+      detailsAnimal:
+        breed: "Breed"
+        sex: "Sex"
+        birth_day: "Birthday"
+        comments: "Comments"
+        female: "Female"
+        male: "Male"
+        rp_sire: "Rp father"
+        rp_dam: "Rp mother"
+        species_type: "Breed"
+        herd: "Nro herd"
+    graphic:
+      title: "Animal milking detail"
+      separator: "Milking evolution chart"
+      title1: "Milking history"
+      milk: "Milk"
+      temperature: "Temperature"
+      conductivity: "Conductivity"
+      pedometry: "Podometry"
+      pro_milk: "Milk production"
+    table:
+      title: "Animal milking detail"
+      separator: "Milking evolution table"
+      date: "Date"
+      kg: "Kg."
+      temperature: "Temperature"
+      conductivity: "Conductivity"
+      flow: "Flow"
+      duration: "Duration"
+
+  tambero_api:
+    actions:
+      edit: "Edit configuration"
+      delete: "Remove "
+      save: "Save"
+      create: "Guardar"
+    edit:
+      heading: "Configuration"
+  tamberoApis:
+    pedometer: "Pedometers"
+    meters: "Meters"
+    assigment_pedometer: "Pedometers Assigned"
+    config: "Settings"
+    backup: "Backup"
+    show:
+      title: "Settings"
+      separator: "General settings"
+      separatorTambero: "Setting of Tambero.com"
+      time-zone: "- Time zone"
+      installed_version: "- Installed version"
+      current_version: "- Available version:"
+      user_id: "- ID user  Tambero.com:"
+      api_key: "- API key Tambero.com:"
+      days: "- Days without connexion with Tambero.com:"
+      days_information: "(Alert the user after days without connection.)"
+      min_milking: "- Minimun time of milking"
+      end_milking: "- Timeout to export"
+      tambero: " Tambero.com"
+      information: "(Please consider that a low value may produce unexpected data exports. Example: 30 min.)"
+      update: "- Update now"
+      btn: "Import animals"
+      pedometry: "- Pedometry data:"
+      weighing: "- Weighing data."
+      firmware: "- The firmware version is:"
+    new:
+      title: "New Tambero Api"
+      separatorTambero: "Setting of Tambero.com"
+      user_id: "- ID Tambero.com"
+      api_key: "- API key Tambero.com:"
+      min_milking: "- Minimun time of milking"
+      end_milking: "- Timeout to export"
+      tambero: " Tambero.com"
+      information: "(Note that a low value of time can generate unwanted or wrong exports. Example: 30 min.)"
+      information_id: "(enter id of Tambero.com)"
+      information_api_key: "(enter api_key of Tambero.com)"
+      information_min_milking: "(Estimated minimum value on the duration of a milking session. Example: 120 min.)"
+      information_export: "(Enter the number of minutes waiting in the system to automatically export to Tambero.com after a milking session.)"
+      pedometry: "- Pedometry Data"
+      weighings: "- Weighings Data"
+
+  apiTransfer:
+    title: "System Log"
+    index:
+      table:
+        type: "Process"
+        name: "Name"
+        date: "Date"
+        result: "Result."
+        code: "Code"
+        error: "Error"
+
+  milkingSession:
+    index:
+      title: "Milking Session"
+      table:
+        date: "Date"
+        start: "Start"
+        end: "End"
+        duration: "Duration"
+        volume: "Volume"
+        average: "Average"
+      separator: "Milking chart"
+    exportExel:
+      start: "Start"
+      end: "End"
+      eartag: "Eartag"
+      volume: "Volume"
+      conductivity: "Conductivity"
+      temperature: "Temperature"
+      meter: "Meter"
+      download: "Click here to download your Excel file."
+      detail: "DETAILS OF MILKING SESSION"
+      date: "Date"
+      duration: "Duration"
+      average: "Average"
+    graphic:
+      title: "Milking history"
+      avgmilk: "Milk production average"
+      milk: "Milk production"
+      conductivity: "Conductivity"
+      temerature: "Temperature"
+      milk: "Milk"
+      avg: "Average"
+    show:
+      animals: "Animals: "
+      meter: "Meter"
+
+  milkingMachine:
+    index:
+      title1: "Warning: There are no animals in the database. Press here. "
+      title: "List of milking meters"
+      table:
+        number: "Number"
+        state: "State"
+        eartag: "Eartag"
+        temperature: "Temperature"
+        conductivity: "Conductivity"
+        volume: "Volume"
+    new:
+      title: "Register milking meters"
+      title1: "Enter the number of milking meters available"
+      number: "Number"
+
+  animalMilking:
+    animalMilkingSession:
+      title: "Details of milking session"
+      details:
+        date: "Date"
+        start: "Start"
+        end: "End"
+        duration: "Duration"
+        volume: "Volume"
+        average: "Average"
+      separator: "Detail of milking per animal"
+      separator1: "Details of meters"
+      separator2: "Animals outside the session"
+      separator3: "Animals of session"
+      table:
+        eartag: "Eartag"
+        start: "Start"
+        end: "End"
+        duration: "Duration"
+        total: "Total"
+        name: "Name"
+        breed: "Breed"
+        detail: "Detail"
+    editEartag:
+      title: "Edit Eartag"
+      current_eartag: "Current eartag:"
+      new_eartag: "Correct eartag:"
+      btn: "Save"
+    tableMilking:
+      separator: "Milking table"
+    graphic: 
+      title: "Flow"
+      sub_title: "Register per second"
+      milk: "Milk"
+      pro_milk: "Milk production"
+      temperature: "Temperature"
+      flow: "Flow"
+      conductivity: "Conductivity"
+      meter: "Meter nro:"
+
+  notificationMessages:
+    index_unknown_eartag:
+      title: "List of Unknown Eartag"
+    message:
+      animals: "Warning. There are no animals in the database. Press here to fix the problem."
+      connexion: "Warning: It has been more of these days without connection to Tambero.com:"
+      meters: "Warning: There are no Milking meters in the system. Press here to fix the problem."
+      backup: "Warning: There is a backup available with latest information. Please click here to download it! (The process may take a few minutes)."
+      configuration: "Warning: Setup information with Tambero.com has not been entered."
+
+  selectLanguage:
+    spanish: "Spanish"
+    english: "English"
+
+  user:
+    signup:
+      title: "Sign Up"
+      name: "Name"
+      email: "E-mail"
+      password: "Password"
+      password_confirmation: "Password confrmation"
+
+  alarm:
+    index:
+      title: "Alarms data"
+      table:
+        name: "Name"
+        description: "Description"
+        status: "Status"
+      status:
+        activated: "Activated"
+        deactivated: "Deactivated"
+      activation: "Activation"
+      title_1: "Alarms activation"
+    new:
+      title: "New alarm"
+      name: "- Name"
+      description: "- Description"
+      status: "- Status"
+    edit:
+      title: "Edit Alarm"
+    actions:
+      delete: "Remove"
+      save: "Save"
+      crete: "Create Alarm"
+      edit: "Edit Alarm"
+
+  pedometry:
+    index:
+      title: "Podometry Data"
+      table:
+        date: "Date"
+        batery: "Batery"
+        steps: "Steps"
+        lying_time: "Lying time"
+        walking_time: "Walking time"
+        standing_time: "Standing time"
+        eartag: "Eartag"
+      graphic:
+        title: "Pedometry Data"
+        sub_title: "Details per Session"
+    index_details:
+      title: "Pedometry details"
+      graphic:
+        title: "Pedometry details"
+        sub_title: "Details per animal"
+    index_history:
+      title: "History Pedometry"
+      detail:
+        steps: "Steps"
+        lying: "Lying"
+        walking: "Walking"
+        standing: "Standing"
+      graphic:
+        title: "Pedometry history"
+        sub_title: "history per animal"
+    exportExel:
+      start: "Start"
+      end: "End"
+      eartag: "Eartag"
+      steps: "Steps"
+      lying: "Lying Time"
+      walking: "Walking Time"
+      standing: "Standing Time"
+      download: "Click here to download your Excel file."
+      detail: "DETAILS OF PEDOMETRY"
+      history: "HISTORY PEDOMETRY"
+      date: "Date"
+      duration: "Duration"
+      average: "Average"
+
+  weighing:
+    index:
+      title: "Weighing Data"
+      table:
+        date: "Date"
+        hour: "hour"
+        weight: "weight"
+        eartag: "Eartag"
+        animal: "Number of animals"
+      graphic:
+        title: "Weighings Data"
+        sub_title: "Details per Session"
+    index_details:
+      title: "Weighing details"
+      graphic:
+        title: "Weighing details"
+        sub_title: "Details per session"
+    index_history:
+      title: "Weighing history"
+      detail:
+        weight: "Last weight"
+      graphic:
+        title: "Weighing history"
+        sub_title: "history per animal"
+    exportExel:
+      detail: "DETAILS OF WEIGHING"
+      date: "Date"
+      eartag: "Eartag"
+      weight: "Weight"
+      hour: "Hour"
+      history: "HISTORY WEIGHING"
+      download: "Click here to download your Excel file."
+
+  hobo:
+    login:
+      title: "Login"
+      e_mail: "E-mail address:"
+      password: "Password:"
+      remember_me: "Remember me"
+      signup: "Sign Up"
+    actions:
+      login: "Login"
+      signup: "Sign Up"
+
+  pedometer:
+    actions:
+      delete: "Remove pedometer"
+      save: "Save"
+      create: "Create pedometer"
+      edit: "Edit pedometer"
+    new:
+      heading: "New Pedometer"
+      btn: "New pedometer"
+      code: "Code"
+      comments: "Comments"
+      animal: "Animal"
+    edit:
+      btn: "Edit Pedometer"
+    index:
+      new: "New Pedometer"
+      code: "Code"
+      comments: "Comments"
+      animal: "Animal"
+    show:
+
+  animal:
+    actions:
+      search: "Search"
+      active: "Active animals"
+      inactive: "Inactive animals"
+
+  milking_machine:
+    actions:
+      save: "Save"

@@ -1,0 +1,302 @@
+<include src="rapid" plugin="hobo"/>
+<include src="taglibs/auto/rapid/cards"/>
+<include src="taglibs/auto/rapid/pages"/>
+<include src="taglibs/auto/rapid/forms"/>
+
+<set-theme name="clean"/>
+
+
+
+
+
+
+<def tag="animal-stylesheet">
+  <% if (session[:mobiledev] == "true") then %>
+    <stylesheet name="animal_mobile"/> 
+  <% else %>
+    <stylesheet name="animal_desktop"/> 
+  <% end %>
+</def>
+
+<def tag="front-stylesheet">
+  <% if (session[:mobiledev] == "true") then %>
+    <stylesheet name="front_mobile"/> 
+  <% else %>
+    <stylesheet name="front"/> 
+  <% end %>
+</def>
+
+
+
+################# FORM PEDOMETERS
+
+<def tag="form" for="Pedometer">
+  <form merge param="default" style="color:#000000;">    
+    <error-messages param/>
+    <field-list fields="code, comments" param>   
+    </field-list>
+    
+    <p>
+      <%= ht 'pedometer.animal', :default=>['Animal'] %>
+     </p>
+    <autocomplete:animal source="&Animal.find(:all, :limit => 5000).map {|a| a.rp_number.to_s}" />
+    <div param="actions">    
+      <div style="margin:0 0 0 20px">
+        <submit label="#{ht 'pedometer.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+      </div>
+    </div>
+  </form>
+</def>
+
+
+##### feckless-fieldset
+
+<extend tag="field-list">
+  <feckless-fieldset style="border:none;margin:0px 0px 0px 0px;padding:0px" merge/>
+</extend>  
+
+ 
+
+##########    LOGIN
+
+<def tag='login-page'>
+  <% remember_me = true if remember_me.nil? %>
+  <page merge title='#{t &apos;hobo.login.title&apos;, :default=>[&apos;Log in&apos;] }'>
+
+    <body:  param/>
+
+    <content: param>
+      <header >
+        <h2 class="title" param='heading'><t key='hobo.login.heading'>Log In</t></h2>
+      </header>
+
+      <section >
+        <div class="conteinerLogin">
+          <login-form  user-model='&model'  />
+        </div>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+#####################   FORM LOGIN
+<def attrs='user-model' tag='login-form'>
+  <% user_model ||= self.try.model -%>
+  <form merge class='login' action='&request.fullpath'>
+    <br/>
+    <labelled-item-list param>
+        <labelled-item >
+            <item-label param='login-label' class="label_login label_login_mobile"><t key='hobo.login.e_mail'><%= user_model.login_attribute.to_s.titleize %></t>
+            </item-label>
+              <item-value>
+                  <input name='login' class='input_login input_login_mobile' param='login-input' id='login' type='text' />
+              </item-value>
+        </labelled-item>
+
+        <labelled-item>
+            <item-label param='password-label' class="label_login label_login_mobile"  ><t key='hobo.login.password'>Password</t></item-label>
+            <item-value>
+                <input name='password' class='input_login input_login_mobile' param='password-input' id='password' type='password' />
+            </item-value>
+        </labelled-item>
+
+        <labelled-item param='remember-me'>
+            <item-label class='label_login label_login_mobile' param='remember-me-label'  ><t key='hobo.login.remember_me'>Remember me:</t></item-label>
+            <item-value>
+                <input name='remember_me' checked param='remember-me-input' id='remember-me' type='checkbox' class="input_login_mobile"/>
+            </item-value>
+        </labelled-item>
+    </labelled-item-list>
+    
+    <div param='actions'>
+      <submit label='#{t &apos;hobo.actions.login&apos;, :default=>[&apos;Log in&apos;] }' param/><if class='nav-item' test='&signup_url'>
+      <t key='hobo.support.or'>or</t> <a href='&signup_url' param='signup' ><t key='hobo.login.signup'>Sign up</t></a></if>
+    </div>
+  </form>
+</def>
+
+
+
+#ACCOUNT
+
+<def tag='account-page'>
+
+  <page merge title='#{t &apos;hobo.account_page.title&apos;, :default=>[&apos;Your Account&apos;] }'>
+
+    <body: class='user-account-page #{type_name}' param/>
+
+    <content: param>
+      <header param='content-header'>
+        <h2 param='heading'><name/></h2>
+      </header>
+
+      <section param='content-body'>
+        <error-messages param/>
+        <form class='change-password' param style="color:black">
+          <field-list param fields='email_address, current_password, password, password_confirmation'>
+            <password-label:><t key='hobo.account_page.new_password'>New Password</t></password-label:>
+            <password-confirmation-label:><t key='hobo.account_page.confirm_new_password'>Confirm New Password</t></password-confirmation-label:>
+          </field-list>
+
+          <div class='actions' param='actions'>
+            <submit label='#{t &apos;hobo.actions.save_account&apos;, :default=>&apos;Save&apos;}' param/>
+          </div>
+        </form>
+      </section>
+    </content:>
+
+  </page>
+
+</def>
+
+
+
+#------------------------------------------------------------------------------4
+
+#PAGE
+
+<def attrs='title, full-title, bottom-load-javascript' tag='page'>
+  <% full_title ||= "#{title} : #{app_name}" %>
+  <html merge-attrs>
+    <head param>
+      <title param><%= strip_tags full_title %></title>
+
+      <do param='general-meta'>
+        <meta name="viewport" content="#{session[:viewport]}"/>
+      </do>
+
+
+      <do param='stylesheets'> 
+        <front-stylesheet/>
+      </do>
+
+      <do param='custom-stylesheets'/>
+
+      <do param='scripts' if='&!bottom_load_javascript'><%# in Hobo <= 1.3, we had other javascripts here.   Now the asset pipeline is preferred. %>
+        <javascript name='#{subsite || &apos;front&apos;}' param='application-javascript'/>
+        <do param='custom-scripts'>
+          <script type='text/javascript'>
+            <do param='custom-javascript'/>
+          </script>
+        </do>
+      </do>
+      <%= csrf_meta_tag %>
+    </head>
+
+    <body param>
+      <set-scoped flash-rendered='&false'>
+        
+          <header class="page-header" param>
+            <br/>
+            <br/>
+            <br/>
+            <account-nav param if='&login_url(Hobo::Model::UserBase.default_user_model)'/>
+
+            <img class="hea" alt="RODEG-FarmServer" src="/assets/RODEG-FarmServer.png" style="background-size:contain;background-repeat:no-repeat;text-align:center;"/>
+            <main-nav class="nav" current='&title' param/>
+          </header>
+
+        <section param='content' with-flash-messages>
+          <section-group>
+            <section param='main-content'>
+              <header param='content-header'/>
+
+              <section param='content-body'/>
+            </section>
+
+            <aside param/>
+          </section-group>
+        </section>
+
+        <footer class='page-footer' param/>
+        <page-scripts param/>
+
+        <if test='&bottom_load_javascript'>
+          <script type='text/javascript' defer>
+              (function() {
+                function getScript(url,success){
+                  var script=document.createElement('script');
+                  script.src=url;
+                  var head=document.getElementsByTagName('head')[0],
+                      done=false;
+                  script.onload=script.onreadystatechange = function(){
+                    if (!done){
+                      if (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete'){
+                      done=true;
+                      success();
+                      script.onload = script.onreadystatechange = null;
+                      head.removeChild(script);
+                    }}
+                  };
+                  head.appendChild(script);
+                }
+
+                getScript('<%= asset_path((subsite || 'front')+'.js')%>',function(){
+                  <do param='custom-javascript'/>
+                });
+              })();
+          </script>
+        </if>
+      </set-scoped>
+    </body>
+  </html>
+</def>
+
+
+<def tag="main-nav" >
+  <navigation class="nav" merge-attrs param="default" style="margin:0px 0px 0px 0px ;">
+    <div class="nav-container" id="navbar-home" >
+      <a id="nav-it" class="nav-it" href="#{base_url}/"><t key="nav.item.home" default="Home"/></a>
+    </div>
+    <div class="nav-container">
+      <a id="nav-it" class="nav-it" with="&MilkingSession"><t key="nav.item.milking_session" default="Milking Session" count="100"><model-name-human count="100"/></t></a>
+    </div>
+    <div class="nav-container">
+      <a id="nav-it" class="nav-it" with="&Animal"><t key="nav.item.animals" default="Animals" count="100"><model-name-human count="100"/></t></a>
+    </div>
+    <div class="nav-container" id="navbar-machines">
+      <a id="nav-it" class="nav-it" with="&MilkingMachine"><t key="nav.item.milking_machine" default="Milking Machine" count="100"><model-name-human count="100"/></t></a>
+    </div>
+    <div class="nav-container">
+      <a id="nav-it" class="nav-it" with="&Alarm"><t key="nav.item.alarm" default="Alarms" count="100"><model-name-human count="100"/></t></a>
+    </div>
+    <% @tambero_api = TamberoApi.first
+      if @tambero_api 
+        if @tambero_api.pedometry_module == true then %>
+          <div class="nav-container">
+            <a id="nav-it" class="nav-it" with="&Pedometry"><t key="nav.item.pedometry" default="Pedometry" count="100"><model-name-human count="100"/></t></a>
+          </div>
+        <% end
+      end 
+
+      if @tambero_api 
+        if @tambero_api.weighing_module == true then %>
+          <div class="nav-container">
+            <a id="nav-it" class="nav-it" with="&Weighing"><t key="nav.item.weighing" default="Weighing" count="100"><model-name-human count="100"/></t></a>
+          </div>
+        <% end
+      end 
+
+      if @tambero_api 
+        if @tambero_api.heat_module == true then %>
+          <div class="nav-container">
+            <a id="nav-it" class="nav-it" with="&Heat"><t key="nav.item.heat" default="Heat" count="100"><model-name-human count="100"/></t></a>
+          </div>
+        <% end
+      end %>
+
+    <% if current_user.administrator? %>
+      <div class="nav-container">
+        <a id="nav-it" class="nav-it" with="&TamberoApi"><t key="nav.item.tambero_api" default="Tambero Api" count="100"><model-name-human count="100"/></t></a>
+      </div>
+      <div class="nav-container">
+        <a id="nav-it" class="nav-it" with="&ApiTransfer"><t key="nav.item.api_transfer" default="Record" count="100"><model-name-human count="100"/></t></a>
+      </div>
+    <% end %>
+    
+
+  </navigation>
+</def>
+
+

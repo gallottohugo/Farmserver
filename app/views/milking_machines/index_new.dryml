@@ -1,0 +1,25 @@
+<page  title="New Milking Machine ">
+
+
+  
+  <body: class=" " />
+
+
+  <content-body: style="margin:0px 0px 0px 5px">
+	  <div class="title titleBoxLarge"><t key="milkingMachine.new.title" default="Register milking machine"/></div>
+	  <br/>
+    <br/>
+    <div  class="label_login"><t key="milkingMachine.new.title1" default="Enter the number of milking machines"/></div>
+    <br/>
+
+    <form accept-charset="UTF-8" action="/milking_machines/new_machines"  method="get">
+      <br/>
+      <input type="text" name="number" class="input_login"/>
+      <br/>
+      <div class="clean"/>
+      <br/>
+      <input type="submit" value="#{ht 'milking_machine.actions.save', :default=>['Save']}" />
+    </form>
+  
+  </content-body:>
+</page>

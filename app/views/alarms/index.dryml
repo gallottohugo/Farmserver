@@ -1,0 +1,43 @@
+<page title="#{ht 'alarm.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page alarm" />
+
+    <content-header: >
+     <div class="title tidtleBoxLarge"><t key="alarm.index.title"  default="Podometry Data" /></div>
+    </content-header:>
+
+    <content-body: >
+      
+      <div class="mobilClear"/>
+      <div class="clean"/>
+      <table class="table table-hover" >
+        <tr>
+          <th id="small"><t key="alarm.index.table.name" default="Name"/></th>
+          <th id="small"><t key="alarm.index.table.description" default="Description"/></th>
+          <th id="small"><t key="alarm.index.table.status" default="Status"/></th>
+          
+        </tr>
+        <% @alarms.each do |a| %>
+          <tr onclick="location.href='/animals/#{a.id}'">
+            <td id="value"><a id="lin" href='/alarms/#{a.id}'><%= a.name %></a></td>
+            <td id="value"><%= a.description %></td>
+            
+            <% if a.status %>
+              <td id="value"><t key="alarm.index.status.activated" default="Activated"/></td>
+            <% else %>
+              <td id="value"><t key="alarm.index.status.deactivated" default="Deactivated"/></td>
+            <% end %>
+
+          </tr>
+        <% end %>
+      </table>
+
+      <a href="alarms/alarm_activation">
+        <div class="btn textMedium">
+           <t key="alarm.index.activation" default="Activation"/>
+        </div>
+      </a >
+
+
+
+    </content-body:>
+  </page>

@@ -1,0 +1,27 @@
+<page title="#{ht 'pedometry.show.title', :default=>['Pedometry'], :name => name(:no_wrapper => true) }" without-aside >
+
+  <body: class="show-page pedometry" />
+
+  <content-header: >
+    <h2 class="heading">
+      <ht key="pedometry.show.heading" name="#{name(:no_wrapper => true)}">
+        Pedometry <name/>
+      </ht>
+    </h2>
+
+    <record-flags fields="" />
+
+    <a action="edit" if="&can_edit?" class="edit-link">
+      <ht key="pedometry.actions.edit" name="#{name(:no_wrapper => true)}">
+        Edit Pedometry
+      </ht>
+    </a>
+  </content-header:>
+
+  <content-body: >
+    <div style="color:black">
+      <field-list fields="battery, dated_at, steps_number, real_steps, lying_time, walking_time, standing_time" />
+    </div>
+  </content-body:>
+
+</page>

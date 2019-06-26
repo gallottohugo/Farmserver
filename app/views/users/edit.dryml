@@ -1,0 +1,18 @@
+<page title="#{ht 'user.edit.title', :default=>['Edit User'], :name => name(:no_wrapper => true) }">
+
+    <body: class="edit-page user" />
+
+    <content-header: >
+      <h2 class="heading">
+        <ht key="user.edit.heading" name="#{name(:no_wrapper => true)}">
+          Edit User
+        </ht>
+      </h2>
+      <delete-button label="#{ht 'user.actions.delete', :default=>['Remove User']}"/>
+    </content-header:>
+
+    <content-body: >
+      <form style="color:black"/>
+    </content-body:>
+
+</page>

@@ -1,0 +1,45 @@
+ <page title="#{ht 'alarm.new.title', :default=>[' New Alarm'] }">
+    <body: class="new-page alarm" />
+
+    
+
+    <content-body: >
+      <div class="title"><t key="alarm.new.title" default="New Alarm"/></div>
+      <br/>
+      <form class="default" style="color:black">
+        <field-list fields="name, description, status" >
+          <name-label:>
+          </name-label:>
+          <name-view:>
+            <div class="line"><t key="alarm.new.name" default="- Name:"/></div>
+            <input  />
+              <br/>
+              <br/>
+              <br/>
+          </name-view:>
+          <description-label:>
+          </description-label:>
+          <description-view:>
+            <div class="line"><t key="alarm.new.description" default="- Description:"/></div>
+            <input  />
+              <br/>
+              <br/>
+              <br/>
+          </description-view:>
+          <status-label:>
+          </status-label:>          
+          <status-view:>
+            <div class="line"><t key="alarm.new.status" default="- Status:"/></div>
+            <input  />
+            <br/>
+          </status-view:>
+        </field-list>
+        <div class="actions">
+            <submit label="#{ht 'alarm.actions.save', :default=>['Save']}" /><or-cancel class="cancel"/>
+        </div>
+      </form>
+
+
+     
+    </content-body:>
+  </page>

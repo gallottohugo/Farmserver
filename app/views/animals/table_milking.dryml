@@ -1,0 +1,94 @@
+<page  title="Gráfico Animal">
+
+
+  <body: class="index-page animal"/>
+  <content-body: style="margin:0px 0px 0px 5px">
+
+    <div class="title">Detalle de ordeñe por animal</div>
+    <br/>
+    <div class="boxLarge" style="height:146px;width:330px;border-style:solid;border-color:#6FB896;border-width:0px">        
+        <div class="boxSmall" style="text-align:center;font-size:23px;float:left">
+            <div style="padding:0 0 0  20px; float:left">
+                <div style="height:146px;width:120px;background-image:url(/assets/eartag1.png); 
+                               background-size:contain;background-repeat:no-repeat;text-align:center;line-height:140px;">         
+                	<div style="padding:20px 10px 10px 10px">
+                       <%= @animal.rp_number %>
+                	</div>  
+            	</div>
+         	</div>
+        </div>            
+        <div class="boxSmall" style="text-align:center;font-size:23px;height:100px;width:148px;color:#6FB896"> 
+            <div style="padding:0 0 5px 0; height:30px;"><%= @animal.long_name %></div>
+            <img src="/assets/picture.png" width="160"></img>
+        </div>        
+    </div>
+          
+    <div style="float:left;width:125px;height:148px;color:#424242;padding:5px 3px 3px 3px;">
+        <p id="titulo">Fecha</p>
+        <p id="detalle" style="padding-top:30px;"><%= @date %></p>
+        <p id="detalle"><%= @time %></p>       
+    </div>
+
+  
+    <div style="float:left;width:130px;height:148px;color:#424242;padding:5px 3px 3px 3px;">
+        <p id="titulo">Valores</p>
+        <p id="detalle" style="padding-top:30px;"> <%= @last_milking.volume %> kg</p>
+        <p id="detalle"> <%= @last_milking.conductivity %> - <%= @last_milking.temperature %>°</p>
+    </div>
+        
+    <a href="">
+        <div class="boxSmall" style="background-color:#6FB896;text-align:center:">
+           <div style="text-align:center;height:154px">
+             <div class="detail" style="text-align:center;">
+                Descargar datos de ordeñe
+                <img alt="LogoOrdene" src="/assets/LogoOrdene.png" style="height:110px;width:110px;background-size:contain;background-repeat:no-repeat;text-align:center;;"/>
+             </div>
+          </div>
+       </div>
+     </a>
+     <a href="">
+        <div class="boxSmall" style="background-color:#EC6608;text-align:center">
+           <div style="text-align:center;height:154px">
+             <div class="detail" style="text-align:center">
+                Descargar datos de podometro
+                <img alt="LogoPodometria" src="/assets/LogoBlanco.png" style="height:110px;width:110px;background-size:contain;background-repeat:no-repeat;text-align:center;;"/>
+             </div>
+          </div>
+       </div>
+     </a>
+    <div class="clean"/>
+    <br/>
+    <div class="separator">Tabla de ordeñes</div>
+    <br/>
+
+    
+      <div class="row">
+        <div class="span12">
+          <table class="table table-stripped">
+            <tr>
+              <th>Fecha</th>
+              <th>Duración</th>
+              <th>kg</th>
+              <th>Conductividad</th>
+              <th>Temperatura</th>
+              <th>Caudal</th>
+            </tr>
+            <% @table_milking.each do |t|%>
+              <tr>
+                <td><%= t.updated_at.strftime("%d/%m/%Y %H:%M")%></td>
+                <td> - </td>
+                <td><%= t.volume %></td>
+                <td><%= t.conductivity %></td>
+                <td><%= t.temperature %></td>
+                <td>                  
+                    <a href="/animal_milkings/table?animalmilking=#{t.id.to_s}&id_animal=#{@animal.id.to_s}" class="buton">Tabla</a>                  
+                    <a href="/animal_milkings/graphic?animalmilking=#{t.id.to_s}&id_animal=#{@animal.id.to_s}" class="buton">Gráfico</a>
+                </td> 
+              </tr>
+            <%end%>       
+          </table>
+        </div>
+      </div>
+    
+  </content-body:>
+</page>

@@ -1,0 +1,36 @@
+<page  title="#{ht 'animal.index.title', :default=>[model.model_name.human(:count=>100)] }">
+
+  
+  <body: class="index-page animal"/>
+  
+  <content-body: style="margin:0px 0px 0px 5px">
+
+    <div class="title titleAnimals " style="margin:0px 0px 0px 0px;" >
+      <t key="animals.index.search_title" default="Search result"/>
+    </div>   
+    <div class="mobilClear"/>        
+    <div class="clean"/>
+      <table class="table table-hover" >
+        <tr>
+          <th id="small"><t key="animals.index.table.eartag" default="Eartag"/></th>
+          <th id="small"><t key="animals.index.table.milking" default="Milking"/></th>
+          <th id="small"><t key="animals.index.table.pedometer" default="Pedometer"/></th>
+          <th id="small"><t key="animals.index.table.name" default="Name"/></th> 
+          <th id="small"><t key="animals.index.table.breed" default="Breed"/></th>
+          <th id="small"><t key="animals.index.table.detail" default="Details"/></th>        
+        </tr>
+        
+          <tr onclick="location.href='/animals/#{@anim.id}'">
+            <td id="value"><a id="lin" href='/animals/#{@anim.id}'><%= @anim.rp_number %></a></td>
+            <td id="value">-</td>
+            <td id="value">-</td>
+            <td id="value"><%= @anim.long_name %></td>
+            <td id="value"><%= @anim.breed%></td>
+            <td id="value"><a id="lin" href='/animals/#{@anim.id}'><t key="animals.index.table.view" default="View details"/></a></td> 
+          </tr>
+        
+      </table>
+      <br/>
+    
+  </content-body:>
+</page>

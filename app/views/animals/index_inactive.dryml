@@ -1,0 +1,73 @@
+<page  title="#{ht 'animal.index.title', :default=>[model.model_name.human(:count=>100)] }">
+
+  
+  <body: class="index-page animal"/>
+  
+  <content-body: style="margin:0px 0px 0px 5px">
+      <form name="input" action="/animals/table" method="get">
+      <!-- el label, textbox y boton buscar, estan uno abajo del otro por la vista en el celular -->        
+        <div class="label_login">
+          <t key="animals.index.search" default="Search  by RP number"/>
+        </div>
+        <br/>
+        <div>
+          <input type="text" name="search"/>
+        </div>
+        <br/>
+        <div class="left">
+          <input type="submit" value="#{ht 'animal.actions.search', :default=>['Search']}"/>
+        </div>
+      </form>
+      <% if session[:mobiledev] == "true" %>
+        <div class="mobilClear"/>
+        <br/>
+        <br/>
+      <% end %>
+      <div>
+        <a href="/animals">
+          <input type="submit" style="width:250px;background-color:#EC6608" value="#{ht 'animal.actions.active', :default=>['Active animals']}"/>
+        </a>
+      </div>
+
+
+      <br/>
+      <br/>
+      <%if @animals.count == 0 %>
+          <div class="error" style="background-color:red"><t key="animals.index_inactive.note" default="Noo inactive animals were found in the database."/></div>
+      <%else%>
+      
+      <div class="title titleAnimals left">
+        <t key="animals.index.title1" default="Inactive animals"/>
+      </div>
+
+      <div class="mobilClear"/>
+      <div class="clean"/>
+      <table class="table table-hover" >
+        <tr>
+          <th id="small"><t key="animals.index.table.eartag" default="Eartag"/></th>
+          <th id="small"><t key="animals.index.table.milking" default="Milking"/></th>
+          <th id="small"><t key="animals.index.table.pedometer" default="Pedometer"/></th>
+          <th id="small"><t key="animals.index.table.name" default="Name"/></th> 
+          <th id="small"><t key="animals.index.table.breed" default="Breed"/></th>
+          <th id="small"><t key="animals.index.table.detail" default="Details"/></th>        
+        </tr>
+        <% @animals.each do |a| %>
+          <tr onclick="location.href='/animals/#{a.id}'">
+            <td id="value"><a id="lin" href='/animals/#{a.id}'><%= a.rp_number %></a></td>
+            <td id="value">-</td>
+            <td id="value">-</td>
+            <td id="value"><%= a.long_name %></td>
+            <td id="value"><%= a.breed%></td>
+            <td id="value"><a id="lin" href='/animals/#{a.id}'><t key="animals.index.table.view" default="View details"/></a></td> 
+          </tr>
+        <% end %>
+      </table>
+      <br/>      
+    <% end %>
+    <div class="mobilClear"/>
+    <div class="clean"/>
+    <page-nav class="bottom-page-nav"/>
+    
+    
+  </content-body:>
+</page>

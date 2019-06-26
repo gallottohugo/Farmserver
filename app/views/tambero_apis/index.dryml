@@ -1,0 +1,72 @@
+<page  title="#{ht 'tambero_api.index.title', :default=>[model.model_name.human(:count=>100)] }">
+
+
+  
+  <body: class="index-page tambero-api"/>
+  <content-body: style="margin:0px 0px 0px 5px">
+    <a href="">
+     <div class="boxSmall boxSmall_ boxSmallA" style="background-color:#84A225;">
+        <div class="padi">
+          <div class="textMedium textAdmin">
+            <t key="tamberoApis.pedometer" default="Pedometers"/>
+          </div>
+        </div>
+      </div>
+    </a>
+     <a href="">
+     <div class="boxSmall boxSmallA" style="background-color:#6FB896">
+        <div class="padi">
+          <div class="textMedium textAdmin">
+            <t key="tamberoApis.assigment_pedometer" default="Assignmets pedometers"/>
+          </div>
+        </div>
+      </div>
+    </a>
+    <a href="/milking_machines/index_new">
+     <div class="boxLarge" style="background-color:#EC6608">
+        <div class="padi">
+          <div class="textLarge">
+            <t key="tamberoApis.meters" default="Meters"/>
+          </div>
+        </div>
+      </div>
+    </a>
+   
+    <% if @tambero_apis == nil %>
+      <a href="/tambero_apis/new"> 
+        <div class="boxSmall" style="background-color:#380F00">
+          <div class="padi">
+            <div class="textLarge">
+              <t key="tamberoApis.config" default="Settings"/>
+            </div>
+          </div>
+        </div>
+      </a> 
+    <%else%>
+      <a href="tambero_apis/#{@tambero_apis.id}">    
+        <div class="boxLarge boxLargeA" style="background-color:#380F00">
+          <div class="padi">
+            <div class="textLarge">
+              <t key="tamberoApis.config" default="Configuration"/>
+            </div>
+          </div>
+        </div>
+      </a>
+    <%end%>
+
+    <div class="clear clean"/>
+    <br/>
+     <a href="/front/export_backup">
+     <div class="boxLarge" style="background-color:#EC6608">
+        <div class="padi">
+          <div class="textLarge">
+            <t key="tamberoApis.backup" default="Backup"/>
+          </div>
+        </div>
+      </div>
+    </a>
+
+
+  </content-body:>
+</page>
+

@@ -1,0 +1,21 @@
+<page title="#{ht 'animal_milking.edit.title', :default=>['Edit Animal milking'], :name => name(:no_wrapper => true) }">
+    
+    <body: class="edit-page animal-milking"/>
+
+    <content-header: >
+    <br/>
+      <div class="title">
+        <t key="editEartag.title" default="Edit eartag"/>
+      </div>      
+    </content-header:>
+
+    <content-body: >
+      <form class="default">
+        <error-messages />
+        <field-list fields="eartag" class="textMedium" style="color:black;font-size:20px"/>
+        <br/>        
+        <submit label="#{ht 'animal_milking.actions.save', :default=>['Save']}" style="background-color:#84A225"/>
+      </form>
+    </content-body:>
+
+</page>

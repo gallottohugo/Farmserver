@@ -1,0 +1,226 @@
+<page title="#{ht 'tambero_api.show.title', :default=>['Tambero api'], :name => name(:no_wrapper => true) }" without-aside >
+
+    <body: class="show-page tambero-api" />
+
+    <content-header: >
+      <h2 class="heading">
+        <t key="tamberoApis.show.title" default="Settings"/>
+      </h2>
+      <a action="edit" if="&can_edit?" class="edit-link">
+        <ht key="tambero_api.actions.edit" name="#{name(:no_wrapper => true)}">
+          Edit Tambero api
+        </ht>
+      </a>
+    </content-header:>
+
+    <content-body: style="color:black">
+      <br/>
+      <div class="separator"><t key="tamberoApis.show.separator" default="Genral settings"/></div>
+      <br/>
+      <field-list fields="time_zone, language, current_version" >
+        <time-zone-label:>          
+            <div class="line"><t key="tamberoApis.show.time-zone" default="- Time Zone"/></div>
+              <div class="size_22" style="color:black;"> 
+                #{@tambero_api.time_zone}
+              </div>
+            <div class="clean"></div>
+            <br/>
+            <br/>
+        </time-zone-label:>
+        <time-zone-view:>            
+        </time-zone-view:>
+        <language-label:>
+          <div class="line"><t key="tamberoApis.show.language" default="- Language"/></div>
+          <div class="size_22" style="color:black;"> 
+            <%= if @tambero_api.language
+              @tambero_api.language.to_html
+             end %>
+          </div>
+          <div class="clean"></div>
+          <br/>
+          <br/>
+        </language-label:>
+        <language-view:>
+        </language-view:>
+        <current-version-label:>          
+            <div class="line"><t key="tamberoApis.show.current_version" default="- Available version"/></div>
+              <div class="size_22" style="color:black;"> 
+                #{@tambero_api.current_version}
+              </div>
+            <div class="clean"></div>
+            <br/>
+            <br/>
+        </current-version-label:>
+        <current-version-view:>            
+        </current-version-view:>
+      </field-list>
+      <div class="clean"></div>
+      <br/>        
+      <div class="separator"><t key="tamberoApis.show.separatorTambero" default="Tambero.com settings" /></div>
+      <br/>
+      <field-list fields="tambero_user_id, tambero_api_key, days_without_connexion, min_milking, end_milking, pedometry_module, weighing_module, heat_module" >
+        <tambero-user-id-label:>
+          <div class="line"><t key="tamberoApis.show.user_id" default="- Tambero.com User ID:"/></div>
+          <div class="size_22" style="color:black;">
+            #{@tambero_api.tambero_user_id}
+          </div>
+          <div class="clean"></div>
+          <br/>
+          <br/>
+        </tambero-user-id-label:>
+        <tambero-user-id-view:>
+        </tambero-user-id-view:>
+        <tambero-api-key-label:>
+          <div class="line"><t key="tamberoApis.show.api_key" default="- Tambero.com API key:"/></div>
+          <div class="size_22" style="color:black;">
+            #{@tambero_api.tambero_api_key}
+          </div>
+          <div class="clean"></div>
+          <br/>
+          <br/>
+        </tambero-api-key-label:>
+        <tambero-api-key-view:>
+        </tambero-api-key-view:>
+        <days-without-connexion-label:>
+          <div class="line"><t key="tamberoApis.show.days" default="- Days without connexion whit Tambero.com:"/></div>
+          <div class="size_22" style="color:black;">
+            #{@tambero_api.days_without_connexion}
+          </div>
+          <div class="clean"></div>
+          <p id="informacion" style="color:black;"><t key="tamberoApis.show.days_information" default=""/></p>
+          <br/>
+          <br/>
+        </days-without-connexion-label:>
+        <days-without-connexion-view:>
+        </days-without-connexion-view:>
+        <min_milking-label:>
+          <div class="line"><t key="tamberoApis.show.min_milking" default="- Minimum time of milking:"/></div>
+          <div class="size_22" style="color:black;">
+            #{@tambero_api.min_milking}
+          </div>
+          <div class="clean"></div>
+            <p id="informacion" style="color:black"><t key="tamberoApis.new.information_min_milking" default="(Estimated minimum value on the duration of a milking session. Example: 120 min.)"/></p>
+          <br/>
+          <br/>
+        </min_milking-label:>
+        
+        <min_milking-view:>
+        </min_milking-view:>
+        <end-milking-label:>
+          <div class="line">
+            <t key="tamberoApis.show.end_milking" default="- Timeout for export:"/><br/>
+            <div style="margin:0px 0px 0px 15px"><t key="tamberoApis.show.tambero" default="Tambero.com"/></div>
+          </div>
+            <div class="size_22" style="color:black;">
+              #{@tambero_api.end_milking}
+            </div>
+            <div class="clean"></div>
+            <p id="informacion" style="color:black;"><t key="tamberoApis.show.information" default=""/></p>
+            <br/>
+            <br/>
+        </end-milking-label:>
+        <end-milking-view:>
+        </end-milking-view:>
+
+        <pedometry-module-label:>
+          <div class="line"><t key="tamberoApis.show.pedometry" default="- Pedometry data"/></div>
+          <div class="size_22" style="color:black;">
+            #{@tambero_api.pedometry_module}
+          </div>
+          <div class="clean"></div>
+          <br/>
+          <br/>
+        </pedometry-module-label:>
+        <pedometry-module-view:>
+        </pedometry-module-view:>
+
+        <weighing-module-label:>
+          <div class="line"><t key="tamberoApis.show.weighing" default="- Weighing data"/></div>
+          <div class="size_22" style="color:black;">
+            #{@tambero_api.weighing_module}
+          </div>
+          <div class="clean"/>
+          <br/>
+          <br/>
+        </weighing-module-label:>
+        <weighing-module-view:>
+        </weighing-module-view:>  
+
+        <heat-module-label:>
+          <div class="line"><t key="tamberoApis.show.heat" default="- Heat data"/></div>
+          <div class="size_22" style="color:black;">
+            #{@tambero_api.weighing_module}
+          </div>
+          <div class="clean"/>
+          <br/>
+          <br/>
+        </heat-module-label:>
+        <heat-module-view:>
+        </heat-module-view:>  
+      </field-list>
+
+        <br/><br/>
+        <div class="separator">
+          <t key="tamberoApis.show.separatorValues" default="Setting variables"/>
+        </div>
+        <br/>
+
+
+
+        <field-list fields="per_temperature, per_activity, period_between_heats">
+          <per-temperature-label:>
+            <div class="line"><t key="tamberoApis.show.max_temperature" default="- Maximum temperature"/></div>
+            <div class="size_22" style="color:black;">
+              #{@tambero_api.per_temperature}
+            </div>
+            <div class="clean"/>
+            <p style="color:black;" id="informacion"><t key="tamberoApis.new.informacion_max_temp" default=""/></p>
+            <br/>
+            <br/>
+            <br/>
+          </per-temperature-label:>
+          <per-temperature-view:>
+          </per-temperature-view:>
+
+          <per-activity-label:>
+              <div class="line"><t key="tamberoApis.show.activity_variation" default="- Activity variation"/></div>
+              <div class="size_22" style="color:black;">
+                #{@tambero_api.per_activity}
+              </div>
+              <div class="clean"/>
+              <p style="color:black;" id="informacion"><t key="tamberoApis.new.information_activity" default=""/></p>
+              <br/>
+              <br/>
+              <br/>
+          </per-activity-label:>
+          <per-activity-view:>
+          </per-activity-view:>
+
+          <period-between-heats-label:>
+            <div class="line"><t key="tamberoApis.show.period_between_heats" default="- Minimum period between observed heats"/></div>
+            <div class="size_22" style="color:black;">
+              #{@tambero_api.period_between_heats}
+            </div>
+            <div class="clean"/>
+            <p style="color:black;" id="informacion">Falta descripcion</p>
+            <br/>
+            <br/>
+            <br/>
+          </period-between-heats-label:>
+          <period-between-heats-view:>
+          </period-between-heats-view:>
+        </field-list>
+
+
+
+      <br/>
+
+      <a href="/tambero_apis/#{@tambero_api.id}/synchronization">
+        <div class="btn textMedium">
+           <t key="tamberoApis.show.btn" default="Synchronization"/>
+        </div>
+      </a >
+
+    </content-body:>
+
+  </page>

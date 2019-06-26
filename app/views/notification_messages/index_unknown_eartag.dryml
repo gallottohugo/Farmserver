@@ -1,0 +1,26 @@
+<page  title="Unknown eartags">
+
+  <body: class="index-page animal"/>
+  
+  <content-body: style="margin:0px 0px 0px 5px">
+    <div class="title titleBoxLarge"><t key="notificationMessages.index_unknown_eartag.title" default="Note: No animals were found in the database. Click Here"/></div>
+      
+    
+      <table class="table table-hover" >
+        <tr>
+          <th id="small"><t key="animals.index.table.eartag" default="Eartag"/></th>
+        </tr>
+        <% @table_eartags.each do |te| 
+            if @milking = AnimalMilking.where("id = ?", te.code).last
+              @eartag = @milking.eartag %>
+              <tr onclick="location.href='/animal_milkings/#{te.code}/edit?id=#{te.code}'">
+                <td id="value" style="font-size:20px"><%= @eartag %> </td>
+              </tr>
+            <% else
+              next
+            end%>
+        <% end %>
+      </table>
+    
+  </content-body:>
+</page>

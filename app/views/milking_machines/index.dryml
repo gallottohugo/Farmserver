@@ -1,0 +1,63 @@
+<page  title="#{ht 'milking_machine.index.title', :default=>[model.model_name.human(:count=>100)] }">
+
+  
+  <body: class="index-page milking-machine" />
+
+  <content-body: style="margin:0px 0px 0px 5px ">
+    <%if MilkingMachine.count == 0 %>
+        <a href="/milking_machines/index_new">       
+            <div class="error" style="background-color:red"><t key="milkingMachine.index.title1" default="Attention: Do not milking stalls were found. Click Here!"/> </div>
+        </a>
+    <%else%>
+        <div class="title titleBoxLarge"><t key="milkingMachine.index.title" default="List of milking machines"/> </div>     
+        <br/>
+        <table class='table table-hover' id='monitor-table'>
+          <tr>
+            <th id="small"><t key="milkingMachine.index.table.number" default="Number"/></th>
+            <th id="small"><t key="milkingMachine.index.table.state" default="State"/></th>
+            <th id="small"><t key="milkingMachine.index.table.eartag" default="Eartag"/></th>
+            <th id="small"><t key="milkingMachine.index.table.volume" default="Volume"/>  </th>
+            <th id="small"><t key="milkingMachine.index.table.temperature" default="Temperature"/></th>
+            <th id="small"><t key="milkingMachine.index.table.conductivity" default="Conductivity"/></th>
+          </tr>
+            <% @milking_machines.each do |m|
+                  @dit = MilkingMachineRead.where("meter = ?", m.number).last 
+                    url="" 
+                      unless @dit == nil 
+                        if (@dit.eartag > 0)
+                          @animal = Animal.where("rp_number = ?", @dit.eartag).last          
+                          
+                          url_1 = "/animal_milkings/graphic?animalmilking="+@dit.milking_current.to_s
+                          unless @animal == nil
+                            url_2 = "&id_animal="+@animal.id.to_s   
+                          else
+                            url_2 = ""
+                          end
+                
+                          url = url_1 + url_2
+                        else
+                          url = ""
+                        end 
+                      end%>
+                        <tr class="milker-reporter">
+                          <td class="milker-number">
+                            <a id="lin"  href="#{url} ">
+                              <t key="milkingSession.show.meter" default="Meter"/> Nro: <%= m.number %>
+                            </a>
+                          </td>
+                          <td id="value" class='milker-status online'>-</td>
+                          <td id="value" class='cow-eartag'>-</td>
+                          <td id="value" class='milking-volu'>-</td>
+                          <td id="value" class='milking-temp'>-</td>
+                          <td id="value" class='milking-cond'>-</td>
+                        </tr>
+            <% end %>            
+        </table>
+        <script>
+          document.getElementById('navbar-machines').className='active'
+          setInterval("update_milkers()",2000);
+        </script>
+        
+    <% end %>
+  </content-body:>
+</page>

@@ -1,0 +1,487 @@
+es_AR:
+  activerecord:
+    attributes:
+      pedometer:
+        code: "Código"
+        comments: "Comentario"
+        animal: "Animal"
+
+  animal/species_types:
+    cow: "Bovina"
+    goat: "Caprina"
+    zebu: "Bovina(Cebú)"
+    buffalo: "Bufalina"
+    sheep: "Ovina"
+    camel: "Camelido"
+    llama: "Llama"
+    alpaca: "Alpaca"
+    hog: "Cerdo"
+    horse: "Caballo"
+
+  tambero_api/language:
+    es_AR: "Español"
+    en_US: "Ingles"
+
+  nav:
+    item:
+      home: "Inicio"
+      animals: "Animales"
+      milking_controls: "Controles de ordeñe"
+      tambero_api: "Administrar"
+      milking_session: "Sesiones de Ordeñe"
+      milking_machine: "Puestos de Ordeñe"
+      api_transfer: "Registro"
+      pedometry: "Podometría"
+      weighing: "Pesaje"
+      alarm: "Alarmas"
+      heat: "Celos"
+
+  front:
+    title: "Vista General"
+    error:
+      tambero: "Atención: No se encontro configuración con Tambero.com. Pulse Aquí"
+      milking_machine: "Atención: No se encontraron puestos de ordeñe. Pulse Aquí"
+      version: "Atención: Existe una nueva versión del sistema. Pulse Aquí"
+      animals: "Atención: No se encontraron animales en la base de datos. Pulse Aquí"
+      connexion: "Atención: Pasaron la siguiente cantidad de dias sin conexión con Tambero.com:"
+    milking: 
+      title: "Ordeñes"
+      detail: "sesiones de ordeñes registradas"
+    animals:
+      title: "Animales"
+      detail: "animales registrados"
+    meters:  "Medidores"
+    tambero: "Gestionar desde Tambero.com"
+    separator: "Medidores / Puestos de Ordeñe"
+    currentState:
+      title: "Estado Actual"
+      duration: "Duración de Sesión"
+      animals: "Cantidad de Animales"
+      time_animal: "Minutos por Animal"
+      total: "Total de Kg"
+      avg: "Promedio de Kg"
+    previousState:
+      duration: "Promedio anterior:"
+      animals: "Promedio anterior:"
+      time_animal: "Promedio anterior:"
+      total: "Promedio anterior:"
+      avg: "Promedio anterior:"
+    meter:
+      number: "Puesto"
+      temperature: "Temperatura"
+      eartag: "Caravana"
+
+  animals:
+    index:
+      note: "Atención: No se encontraron animales en la base de datos. Pulse Aquí"
+      title: "Animales Activos"
+      title1: "Animales Inactivos"
+      search: "Buscar por caravana"
+      search_title: "Resultado"
+      table:
+        eartag: "Caravana"
+        milking: "En Ordeñe"
+        pedometer: "Podometro Asignado"
+        name: "Nombre"
+        breed: "Raza"
+        detail: "Detalle"
+        view: "Ver detalle"
+    index_inactive:
+      note: "No se encontraron animales en la base de datos"
+    show:
+      title: "Detalle de ordeñe por animal"
+      separator_graphic: "Gráfico de ordeñes"
+      details:
+        date: "Fecha"
+        values: "Valores"
+        btn_table: "Ver en tabla" 
+        btn_chart: "Ver en gráfico"
+      showtable: "Ver en tabla"
+      tambero: "Gestionar desde Tambero.com"
+      separatorAnimal: "Detalle del animal"
+      separatorMilking: "Detalle del ultimo ordeñe"
+      detailsAnimal:
+        breed: "Raza"
+        sex: "Sexo"
+        birth_day: "Fecha nacimiento"
+        comments: "Comentarios"
+        female: "Hembra"
+        male: "Macho"
+        rp_sire: "Rp padre"
+        rp_dam: "Rp madre"
+        species_type: "Especie"
+        herd: "Nro rodeo"
+    graphic:
+      title: "Detalle de ordeñe por animal"
+      separator: "Gráfico de evolución del caudal en ordeñe"
+      title1: "Registro historico de ordeñes"
+      milk: "Leche"
+      temperature: "Temperatura"
+      conductivity: "Conductividad"
+      pedometry: "Podometria"
+      pro_milk: "Producción de leche"
+    table:
+      title: "Detalle de ordeñe por animal"
+      separator: "Tabla de evolución del caudal en ordeñe"
+      date: "Fecha"
+      kg: "Kg."
+      temperature: "Temperatura"
+      conductivity: "Conductividad"
+      flow: "Caudal"
+      duration: "Duración"
+
+  tambero_api:
+    actions:
+      edit: "Editar Configuración"
+      delete: "Eliminar "
+      save: "Guardar"
+      create: "Guardar"
+    edit:
+      heading: "Configuración"
+
+  tamberoApis:
+    pedometer: "Podómetros"
+    meters: "Puestos de Ordeñe"
+    assigment_pedometer: "Asignación de Podometros"
+    config: "Configuración"
+    backup: "Hacer copia de seguridad"
+    show:
+      title: "Configuración"
+      separator: "Configuración General"
+      separatorTambero: "Configuración de Tambero.com"
+      separatorValues: "Detección de celos"
+      time-zone: "- Zona horaria"
+      user_id: "- ID de usuario Tambero.com:"
+      installed_version: "- Version instalada:"
+      current_version: "- Version disponible:"
+      api_key: "- API key Tambero.com:"
+      days: "- Dias sin conexion a Tambero.com:"
+      days_information: "(Pasados los dias, se avisará al usuario que no hubo conexión)"
+      min_milking: "- Tiempo minimo de un ordeñe"
+      end_milking: "- Tiempo de espera para exportar"
+      tambero: "a Tambero.com"
+      information: "(Tener en cuenta que un valor bajo de tiempo, puede generar exportaciones indeseadas. Por ejemplo: 30 min.)"
+      update: "- Actualizar inmediatamante"
+      language: "- Idioma"
+      btn: "Importar animales"
+      pedometry: "- Datos de podometría"
+      weighing: "- Datos de pesaje"
+      firmware: "- La version de firmware es:"
+      max_temperature: "- Porcentaje de temperatura"
+      activity_variation: "- Porcentaje de actividad"
+      heat: "- Datos de Celos"
+      period_between_heats: "Periodo mínimo entre celos observados"
+    new:
+      title: "Nuevo Tambero Api"
+      separatorTambero: "Configuración de Tambero.com"
+      user_id: "- ID de usuario:"
+      api_key: "- API key:"
+      min_milking: "- Tiempo minimo de un ordeñe:"
+      end_milking: "- Tiempo de espera para exportar:"
+      tambero: "a Tambero.com"
+      information: "(Tener en cuenta que un valor bajo de tiempo, puede generar exportaciones indeseadas)"
+      information_id: "(ingresar el id de Tambero.com)"
+      information_api_key: "(ingresar el api_key de Tambero.com)"
+      information_min_milking: "(Valor mínimo aproximado sobre la duración de una sesión de ordeñe. Por ejemplo: 120 min.)"
+      information_export: "(Ingrese los minutos de espera, para exportar a Tambero.com luego de una sesion de ordeñe.)"
+      pedometry: "- Información de podometría"
+      weighing: "- Información de pesaje"
+      informacion_max_temp: "Cuando la temperatura excede el porcentaje ingresado, se activará alerta. Ejemplo: 120"
+      information_activity:  "Cuando la actividad de un animal excede el porcentaje ingresado, se activará un alerta. Ejemplo 130"
+
+  apiTransfer:
+    title: "Registro del Sistema"
+    index:
+      table:
+        type: "Proceso"
+        name: "Nombre"
+        date: "Fecha"
+        result: "Resultado"
+        code: "Código"
+        error: "Error"
+
+  milkingSession:
+    index:
+      title: "Sesiones de ordeñe"
+      table:
+        date: "Fecha"
+        start: "Inicio"
+        end: "Final"
+        duration: "Duración"
+        volume: "Volumen"
+        average: "Promedio"
+      separator: "Gráfico del total de ordeñe"
+    exportExel:
+      start: "Inicio"
+      end: "Final"
+      eartag: "Caravana"
+      volume: "Volumen"
+      conductivity: "Conductividad"
+      temperature: "Temperatura"
+      meter: "Medidor"
+      download: "Click aquí para descargar el archivo excel."
+      detail: "DETALLE DE LA SESION DE ORDEÑE"
+      date: "Fecha"
+      duration: "Duración"
+      average: "Promedio"
+    graphic:
+      title: "Registro de ordeñe"
+      avg_milk: "Promedio de producción de leche"
+      pro_milk: "Produccion de leche"
+      conductivity: "Conductividad"
+      temerature: "Temperatura"
+      milk: "Leche"
+      avg: "Promedio"
+    show: 
+      animals: "Animales: "
+      meter: "Medidor"
+
+  milkingMachine:
+    index:
+      title1: "Atención: No se encontraron puestos de ordeñe. Pulse Aquí"
+      title: "Listado de puestos de ordeñe."
+      table:
+        number: "Numero"
+        state: "Estado"
+        eartag: "Caravana"
+        temperature: "Temperatura"
+        conductivity: "Conductividad"
+        volume: "Volumen"
+    new:
+      title: "Registrar puestos de ordeñe"
+      title1: "Ingrese la cantidad de puestos de ordeñe"
+      number: "Número"
+
+  animalMilking:
+    animalMilkingSession:
+      title: "Detalles de la Sesion de ordeñe"
+      details:
+        date: "Fecha"
+        start: "Inicio"
+        end: "Final"
+        duration: "Duración"
+        volume: "Volumen"
+        average: "Promedio"
+      separator: "Detalle de ordeñe por animal"
+      separator1: "Detalles de medidores"
+      separator2: "Animales que no ingresaron"
+      separator3: "Animales de la sesión"
+      table:
+        eartag: "Caravana"
+        start: "Inicio"
+        end: "Final"
+        duration: "Duración"
+        total: "total"
+        name: "Nombre"
+        breed: "Raza"
+        detail: "Detalle"
+    editEartag:
+      title: "Editar caravana"
+      current_eartag: "Caravana actual:"
+      new_eartag: "Caravana correcta:"
+      btn: "Guardar"
+    tableMilking:
+      separator: "Tabla de ordeñes"
+    graphic: 
+      title: "Caudal de ordeñe"
+      sub_title: "Registro de medición por segundo"
+      milk: "Leche"
+      pro_milk: "Producción de leche"
+      temperature: "Temperatura"
+      flow: "Caudal"
+      conductivity: "Conductividad"
+      meter: "Medidor nro:"
+
+  notificationMessages:
+    index_unknown_eartag:
+      title: "Listado de Caravanas Inexistentes"
+    notification_connexion_input:
+      message: "Atencion: Pasaron la siguiente cantidad de dias sin conexion con Tambero.com:"
+    message:
+      date_input_transfer: "Atención: Pasaron la siguiente cantidad de dias sin conexión con Tambero.com:"
+      animals: "Atención: No se encontraron animales en la base de datos. Pulse Aquí"
+      connexion: "Atención: Pasaron la siguiente cantidad de dias sin conexión con Tambero.com:"
+      meters: "Atención: No se encontraron puestos de ordene. Pulse Aquí"
+      backup: "Atención: Hay un backup disponible con información mas reciente. Click aquí para descargar! (puede demorar unos minutos)"
+      configuration:  "Atención: No se encontro configuracion con Tambero.com."
+
+
+  selectLanguage:
+    spanish: "Spanish"
+    english: "English"
+
+  user:
+    signup:
+      name: "Nombre"
+      email: "E-mail"
+      password: "Contraseña"
+      password_confirmation: "Confirmar contraseña"
+      title: "Registrarse"
+
+  alarm:
+    index:
+      title: "Datos de alarmas"
+      table:
+        name: "Nombre"
+        description: "Descripción"
+        status: "Estado"
+      status:
+        activated: "Activado"
+        deactivated: "Desactivado"
+      activation: "Activación"
+      title_1: "Activación de alarmas"
+    new:
+      title: "Nueva alarma"
+      name: "- Nombre"
+      description: "- Descripción"
+      status: "- Estado"
+    edit:
+      title: "Editar Alarma"
+    actions:
+      delete: "Eliminar"
+      save: "Guardar"
+      crete: "Crear Alarma"
+      edit: "Editar Alarma"
+
+  pedometry:
+    index:
+      title: "Datos de Podometría"
+      table:
+        date: "Fecha"
+        batery: "Bateria"
+        steps: "Pasos"
+        lying_time: "Tiempo acostada"
+        walking_time: "Tiempo caminando"
+        standing_time: "Tiempo parada"
+        eartag: "Caravana"
+      graphic:
+        title: "Datos de Podometría"
+        sub_title: "Detalle por sesion"
+    index_details:
+      title: "Detalles de podometría"
+      graphic:
+        title: "Detalles de podometría"
+        sub_title: "Detalle por animal"
+    index_history:
+      title: "Historial de podometría"
+      detail:
+        steps: "Pasos"
+        lying: "Reposo"
+        walking: "Caminata"
+        standing: "Parada"
+      graphic:
+        title: "Historial de podometría"
+        sub_title: "Histórico del animal"
+    exportExel:
+      start: "Inicio"
+      end: "Final"
+      eartag: "Caravana"
+      steps: "Pasos"
+      lying: "Tiempo Reposo"
+      walking: "Tiempo Caminando"
+      standing: "Tiempo Parada"
+      download: "Click aquí para descargar el archivo excel."
+      detail: "DETALLE DE PODOMETRÍA"
+      history: "HISTORIAL DE PODOMETRÍA"
+      date: "Fecha"
+      duration: "Duración"
+      average: "Promedio"
+
+  heats:
+    index:
+      title: "Celos"
+      table:
+        date: "Fecha y hora"
+        eartag: "Caravana"
+        temp: "Temperatura - (porcentaje)"
+        avg_temp: "Promedio por ordeñe"
+        percentage_temp: "Percentage temperatura"
+        avg_step_animal: "Promedio de pasos por hora - (porcentaje)"
+        avg_step_herd: "Promedio de pasos por hora y rodeo"
+        percentage_steps: "Percentage de pasos"
+        probability_heat: "Probabilidad de celo"
+        probability_tambero: "Probabilidad de Tambero.com"
+        pregnancy: "Preñada: "
+        days: "dias"
+        confirm: "Confirmar"
+        last_confirm: "Último celo confirmado"
+        ago: "días atras"
+        ago_1: "día atras"
+        atention: "Atención: "
+
+  weighing:
+    index:
+      title: "Datos de Pesaje"
+      table:
+        date: "Fecha"
+        hour: "Hora"
+        weight: "Peso"
+        eartag: "Caravana"
+        animal: "Cantidad de animales"
+      graphic:
+        title: "Datos de Pesaje"
+        sub_title: "Detalle por sesion"
+    index_details: 
+      title: "Detalles de Pesaje"
+      graphic:
+        title: "Detalles de pesaje"
+        sub_title: "Detalle por sesión"
+    index_history:
+      title: "Historial de Pesaje"
+      detail:
+        weight: "Ultimo peso"
+      graphic:
+        title: "Historial de Pesaje"
+        sub_title: "Histórico del animal"
+    exportExel:
+      detail: "DETALLE DE PESAJE"
+      date: "Fecha"
+      eartag: "Caravana"
+      weight: "Peso"
+      hour: "Hora"
+      history: "HISTORIAL DE PESAJE"
+      download: "Click aquí para descargar el archivo excel."
+
+  hobo:
+    login:
+      title: "Ingresar"
+      e_mail: "Correo electrónico:"
+      password: "Contraseña:"
+      remember_me: "Recordorme"
+      signup: "Registrarse"
+    actions:
+      login: "Ingresar"
+      signup: "Registrarse"
+
+
+  pedometer:
+    actions:
+      delete: "Eliminar podometro"
+      save: "Guardar"    
+      create: "Crear podómetro"
+      edit: "Editar podómetro"
+    new:
+      heading: "Nuevo podómetro"
+      btn: "Nuevo Podometro"
+      code: "Código"
+      comments: "Comentarios"
+      animal: "Animal"
+    edit:
+      btn: "Editar Podometro"
+    index:
+      new: "Nuevo podometro"
+      code: "Código"
+      comments: "Comentario"
+      animal: "Animal"
+    show:
+
+  animal:
+    actions:
+      search: "Buscar"
+      active: "Animales activos"
+      inactive: "Animales inactivos"
+
+  milking_machine:
+    actions:
+      save: "Guardar"
+

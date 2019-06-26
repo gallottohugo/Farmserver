@@ -1,0 +1,94 @@
+<page  title="Table Milkings">
+
+  <custom-stylesheets:> 
+      <animal-stylesheet/>
+  </custom-stylesheets:>
+
+  <body: class="index-page animal"/>
+   <content-body: style="margin:0px 0px 0px 5px">
+
+    <div class="title"><t key="animals.table.title" default="" /></div>
+    <br/>
+    <div class="boxLarge boxLargeA" >        
+      <div class="boxSmall boxSmallA">
+        <div class="pad">
+          <div class="eartag" style="color:black">         
+            <div class="pad1">
+              <%= @animal.rp_number %>                        
+            </div>  
+          </div>
+        </div>
+      </div>            
+      <div class="boxSmall boxSmallA" style="height:100px;width:148px;color:#6FB896"> 
+          <div style="padding:0 0 5px 0; height:30px;"><%= @animal.long_name %></div>
+          <img src="#{ @picture }" width="160"></img>
+      </div>        
+    </div>
+    <div class="values">
+      <p id="title"><t key="animals.show.details.date" default="Date"/></p>
+      <p id="detail" style="padding-top:30px;"><%= @date_session %></p>
+      <p id="detail"><%= @time_session %></p>       
+    </div>
+    <div class="values" style="width:130px;">
+      <p id="title"><t key="animals.show.details.values" default="Values"/></p>
+      <p id="detail" style="padding-top:30px;"><%= @last_milking.volume%> kg</p>
+      <p id="detail"><%=@last_milking.conductivity%>-<%= @last_milking.temperature%>°</p>
+    </div>
+        
+    <a href="">
+        <div class="boxSmall" style="background-color:#6FB896;text-align:center:">
+           <div style="text-align:center;height:154px">
+             <div class="detail" style="text-align:center;">
+                Descargar datos de ordeñe
+                <img alt="LogoOrdene" src="/assets/LogoOrdene.png" style="height:110px;width:110px;background-size:contain;background-repeat:no-repeat;text-align:center;;"/>
+             </div>
+          </div>
+       </div>
+     </a>
+     <a href="">
+        <div class="boxSmall" style="background-color:#EC6608;text-align:center">
+           <div style="text-align:center;height:154px">
+             <div class="detail" style="text-align:center">
+                Descargar datos de podometro
+                <img alt="LogoPodometria" src="/assets/LogoBlanco.png" style="height:110px;width:110px;background-size:contain;background-repeat:no-repeat;text-align:center;;"/>
+             </div>
+          </div>
+       </div>
+     </a>
+    <div class="clean"/>
+    <br/>
+    <div class="separator"><t key="animalMilking.tableMilking.separator" default="Milking table" /> </div>
+    <br/>
+
+    
+      <div class="row">
+        <div class="span12">
+          <table class="table table-stripped">
+            <tr>
+              <th><t  key="animals.table.date" default="Date" /></th>
+              <th><t  key="animals.table.duration" default="Duration" /></th>
+              <th><t  key="animals.table.kg" default="Kg." /></th>
+              <th><t  key="animals.table.conductivity" default="Conductivity" /></th>
+              <th><t  key="animals.table.temperature" default="Temperature" /></th>
+              <th><t  key="animals.table.flow" default="Flow" /></th>
+            </tr>
+            <% @table_milking.each do |t|%>
+              <tr>
+                <td id="value"><%= t.date_start_at.strftime("%d/%m/%Y %H:%M")%></td>
+                <% @duration = (t.date_end_at - t.date_start_at) / 60 %>
+                <td id="value"><%= @duration.round(2)%> min</td>
+                <td id="value"><%= t.volume %></td>
+                <td id="value"><%= t.conductivity %></td>
+                <td id="value"><%= t.temperature %></td>
+                <td>                  
+                    <a href="/animal_milkings/table?animalmilking=#{t.id.to_s}&id_animal=#{@animal.rp_number.to_s}" class="buton">Tabla</a>                  
+                    <a href="/animal_milkings/graphic?animalmilking=#{t.id.to_s}&id_animal=#{@animal.rp_number.to_s}" class="buton">Gráfico</a>
+                </td> 
+              </tr>
+            <%end%>       
+          </table>
+        </div>
+      </div>
+    
+  </content-body:>
+</page>

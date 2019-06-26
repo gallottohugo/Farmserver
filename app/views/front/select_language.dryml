@@ -1,0 +1,35 @@
+<page  title="Select Language">
+
+  <custom-stylesheets:> 
+      <animal-stylesheet/>
+  </custom-stylesheets:>
+
+  <body: class="front-page" />
+
+  <content-body: style="margin:0px 0px 0px 0px;" >
+  <div class="title">Select Language</div>
+  <br/>
+	<a href="/application/set_locale?language=es_AR">
+	 <div class="boxLarge" style="background-color:#EC6608">
+	    <div class="padi">
+	      <div class="textLarge">
+	        <t key="selectLanguage.spanish" default="Spanish"/>
+	      </div>
+	    </div>
+	  </div>
+	</a>
+
+	<a href="/application/set_locale?language=en_US">
+     <div class="boxLarge" style="background-color:#EC6608">
+        <div class="padi">
+          <div class="textLarge">
+            <t key="selectLanguage.english" default="English"/>
+          </div>
+        </div>
+      </div>
+    </a>
+
+  </content-body:>
+
+
+</page>

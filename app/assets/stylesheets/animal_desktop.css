@@ -1,0 +1,17 @@
+.boxLargeA{height:146px;width:330px;border-style:solid;border-color:#6FB896;border-width:0px;}
+.boxSmallA{text-align:center;font-size:23px;float:left}
+           
+.pad{padding:0 0 0  20px; float:left}
+.eartag{height:146px;width:120px;background-image:url(/assets/eartag1.png);background-size:contain;background-repeat:no-repeat;text-align:center;line-height:140px;}
+.padEartag{padding:20px 10px 10px 10px}
+.padName{padding:0 0 5px 0; height:30px;}
+.conteinerPicture{width:160;}
+.pad1{padding:20px 10px 10px 10px}
+.values{float:left;width:135px;height:148px;color:#424242;padding:0px 3px 3px 3px;}
+.button-table{background-color:#EC6608; height:154px; width:145px;text-align:center;}
+.img-table{background-image:url(/assets/Tabla.png);background-size:contain;background-repeat:no-repeat;text-align:center;}
+.button-tambero{background-color:#380F00; height:154px; width:145px;text-align:center;}
+.img-tambero{background-image:url(/assets/LogoBlanco.png);background-size:contain;background-repeat:no-repeat;text-align:center;}
+.button-table:hover, .button-tambero:hover{opacity:0.7;}
+
+        

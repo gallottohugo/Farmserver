@@ -1,0 +1,18 @@
+<page title="#{ht 'pedometry.edit.title', :default=>['Edit Pedometry'], :name => name(:no_wrapper => true) }">
+
+  <body: class="edit-page pedometry" />
+
+  <content-header: >
+    <h2 class ="heading">
+      <ht key="pedometry.edit.heading" name="#{name(:no_wrapper => true)}">
+        Edit Pedometry
+      </ht>
+    </h2>
+    <delete-button label="#{ht 'pedometry.actions.delete', :default=>['Remove This Pedometry']}" />
+  </content-header:>
+
+  <content-body: >
+    <form style="color:black"/>
+  </content-body:>
+
+</page>

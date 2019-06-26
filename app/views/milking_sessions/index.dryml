@@ -1,0 +1,194 @@
+<page title="#{ht 'milking_session.index.title', :default=>[model.model_name.human(:count=>100)] }">
+	
+  
+  <body: class="index-page milking-session" />
+
+	<content-body: style="margin:0px 0px 0px 0px ">
+      <div class="title" ><t key="milkingSession.index.title" default="Milking sessions"/></div>      
+	    <div class="clean"></div>
+	    <br/>
+	    <table class="table table-hover" >
+	      <tr>
+	        <th><t key="milkingSession.index.table.date" default="Date "/></th>
+	        <th><t key="milkingSession.index.table.start" default="Start"/></th>
+	        <th><t key="milkingSession.index.table.end" default="End"/></th>
+	        <th><t key="milkingSession.index.table.duration" default="Duration"/></th> 
+	        <th><t key="milkingSession.index.table.volume" default="Volume"/></th>
+	        <th><t key="milkingSession.index.table.average" default="Average"/></th>        
+	      </tr>
+	        <% @milking_session.each do |ms|%>
+	        <% @duration = ms.final - ms.inicio%>
+	          <tr class="linkrow" onclick="location.href='/milking_sessions/#{ ms.id }'">                        
+	          	<td id="value"> <%= ms.date_at.strftime("%d/%m/%Y") %> </td>
+	          	<td id="value"> <%= ms.inicio.localtime(@time_zone).strftime("%d/%m/%Y - %H:%M:%S") %> </td>
+	          	<td id="value"> <%= ms.final.localtime(@time_zone).strftime("%d/%m/%Y - %H:%M:%S")%> </td>
+	          	<td id="value"> <%= Time.at(@duration).utc.strftime("%H:%M:%S")%> </td>
+	          	<td id="value"> <%= ms.volume.round(2) %> kg.</td>
+	          	<td id="value"> <%= ms.promedio.round(2)%> kg.</td>
+	      	  </tr>
+	        <% end %>
+	    </table>
+
+	    <div class="separator">
+          <t key="milkingSession.index.separator" default="Milking chart"/>
+	    </div>
+
+        <div class="">     
+            <div class="">
+                <div class="">
+                    <div class="conteinerGraphic" id='container'/>
+                </div>
+                <div class="">
+                   <p id='choices'></p>
+                </div>
+            </div>
+        </div>
+          
+        <script type="text/javascript">
+          $(function () {
+              var chart;
+              $(document).ready(function() {
+                  chart = new Highcharts.Chart({
+                      chart: {
+                          renderTo: 'container',
+                          zoomType: 'xy'
+                      },
+                      title: {
+                          text: '<%= t :key => 'milkingSession.graphic.title', :default => 'Milking history' %>'
+                      },
+                      subtitle: {
+                          text: ''
+                      },
+                      xAxis: [{
+                          categories:  <%= @time%>
+                      }],
+                      yAxis: [{ // Primary yAxis
+                          labels: {
+                              formatter: function() {
+                                  return this.value +' Cond.';
+                              },
+                              style: {
+                                  color: '#89A54E'
+                              }
+                          },
+                          title: {
+                              text: '<%= t :key=>'milkingSession.graphic.conductivity', :default=>'Conductivity' %>',
+                              style: {
+                                  color: '#89A54E'
+                              }
+                          },
+                          opposite: true
+              
+                      }, { // Secondary yAxis
+                          gridLineWidth: 0,
+                          title: {
+                              text: '<%= t :key=>'milkingSession.graphic.pro_milk', :default=>'Milk production' %>',
+                              style: {
+                                  color: '#6FB896'
+                              }
+                          },
+                          labels: {
+                              formatter: function() {
+                                  return this.value +' Kg';
+                              },
+                              style: {
+                                  color: '#6FB896'
+                              }
+                          }
+              
+                      }, { // Tertiary yAxis
+                          gridLineWidth: 0,
+                          title: {
+                              text: '<%= t :key=>'milkingSession.graphic.temperature', :default=>'Temperature' %>',
+                              style: {
+                                  color: '#EC6608'
+                              }
+                          },
+                          labels: {
+                              formatter: function() {
+                                  return this.value +' °C';
+                              },
+                              style: {
+                                  color: '#EC6608'
+                              }
+                          },
+
+                          opposite: true
+                      },{ // Tertiary yAxis
+                          gridLineWidth: 0,
+                          title: {
+                              text: '<%= t :key=>'milkingSession.graphic.avg_milk', :default=>'Milk production average' %>',
+                              style: {
+                                  color: '#380F00'
+                              }
+                          },
+                          labels: {
+                              formatter: function() {
+                                  return this.value +' Kg';
+                              },
+                              style: {
+                                  color: '#380F00'
+                              }
+                          },
+
+                          
+                      },],
+                      tooltip: {
+                          formatter: function() {
+                              var unit = {
+                                  'Leche': 'Kg',
+                                  'Conductividad': 'Cond.',
+                                  'Temperatura': '°C',
+                                  'Promedio': 'Kg'
+                              }[this.series.name];
+              
+                              return ''+
+                                  this.x +': '+ this.y +' '+ unit;
+                          }
+                      },
+                      legend: {
+                          layout: 'vertical',
+                          align: 'left',
+                          x: 80,
+                          verticalAlign: 'top',
+                          y: 10,
+                          floating: true,
+                          backgroundColor: '#FFFFFF'
+                      },
+                      series: [{
+                          name: '<%= t :key=>'milkingSession.graphic.milk', :default=>'Milk' %>',
+                          color: '#6FB896',
+                          type: 'area',
+                          yAxis: 1,
+                          data: <%= @control_volu%>
+              
+                      }, {
+                          name: '<%= t :key=>'milkingSession.graphic.temperature', :default=>'Temperature' %>',
+                          type: 'spline',
+                          color: '#EC6608',
+                          yAxis: 2,
+                          data: <%= @control_temp%>,
+                          
+                      }, {
+                          name: '<%= t :key=>'milkingSession.graphic.conductivity', :default=>'Conductivity' %>',
+                          color: '#84A225',
+                          type: 'spline',
+                          data: <%= @control_condu%> 
+                      }, {
+                          name: '<%= t :key=>'milkingSession.graphic.avg', :default=>'Average' %>',
+                          color: '#380F00',
+                          type: 'spline',
+                          yAxis: 3,
+                          data: <%= @control_avg %>
+                  }
+                ]
+                  });
+              });
+              
+          });
+        </script>
+
+
+	</content-body:>
+</page>
+

@@ -1,0 +1,163 @@
+<page  title="#{ht 'weighing.index.title', :default=>[model.model_name.human(:count=>100)] }">
+  <body: class="index-page weighing" />
+
+  <content-header: >
+    
+  </content-header:>
+
+  <content-body: style="margin:0px 0px 0px 0px ">
+  <div class="conteinerTitle">   
+    <div class="title tidtleBoxLarge"><t key="weighing.index_details.title"  default="Weighing details" /></div>
+  </div>
+
+  <div class="mobilClear"></div>
+
+  <div class="left1" style="text-align:center;">
+
+    <% 
+    charset = %w{1 2 3 4 6 7 9 a b c d e f g h i j k l m n o p q r s t u v w x y z} 
+       @rndfile = (0...12).map{ charset.to_a[rand(charset.size)] }.join    
+    %>
+    
+      <a href="/weighings/export_details?rndfile=#{@rndfile}&session_id=#{@session_id}">
+        <div class="containerImg1 img-exel">
+        </div>
+        <div class="info info-exel">
+          Excel
+        </div>
+      </a>
+  </div>
+
+    <table class="table table-hover" >
+        <tr>
+          <th><t key="weighing.index.table.date" default="Date"/></th>
+          <th><t key="weighing.index.table.eartag" default="Eartag"/></th>
+          <th><t key="weighing.index.table.hour" default="Hour"/></th>
+          <th><t key="weighing.index.table.weight" default="Weight"/></th>          
+        </tr>            
+          <% @table_weighing.each do |tw| %>           
+            <tr class="linkrow" onclick="location.href='/weighings/index_history?eartag=#{tw.eartag}'">
+              <td id="value"> <%= tw.dated_at %> </td>
+              <td id="value"> <%= tw.eartag %> </td>
+              <td id="value"> <%= tw.hour %> </td>              
+              <td id="value"> <%= tw.weight %> kg. </td>              
+            </tr> 
+          <% end %>            
+      </table>
+
+      <br/>
+      <br/>
+
+      <br/>
+      <br/>
+
+      <div >             
+        <div >
+            <div>
+                <div class="conteinerGraphic" id='container'/>
+            </div>
+            <div>
+                <p id='choices'></p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+     $(function () {
+        var chart;
+        $(document).ready(function() {
+            chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container',
+                    zoomType: 'xy'
+                },
+                title: {
+                    text: '<%= t :key=>'weighing.index_details.graphic.title', :default=>'Weighing data' %>'
+                },
+                subtitle: {
+                    text: '<%= t :key=>'weighing.index_details.graphic.sub_title', :default=>'Details per session' %>'
+                },
+                xAxis: [{
+                    categories:  <%= @time_round %>
+                }],
+                yAxis: [{ // Primary yAxis
+                    labels: {
+                        formatter: function() {
+                            return this.value +'.';
+                        },
+                        style: {
+                            color: '#380F00'
+                        }
+                    },
+                    title: {
+                        text: '',
+                        style: {
+                            color: '#380F00'
+                        }
+                    },
+                    opposite: true
+        
+                }, { // Secondary yAxis
+                    gridLineWidth: 0,
+                    title: {
+                        text: '<%= t :key=>'weighing.index.table.weight', :default=>'Weight' %>',
+                        style: {
+                            color: '#6FB896'
+                        }
+                    },
+                    labels: {
+                        formatter: function() {
+                            return this.value +' kg';
+                        },
+                        style: {
+                            color: '#6FB896'
+                        }
+                    }
+        
+                }
+                ],
+                tooltip: {
+                    formatter: function() {
+                        var unit = {
+                            'Peso': ' kg.'
+                        }[this.series.name];
+        
+                        return ''+
+                            this.x +': '+ this.y +' '+ unit;
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'left',
+                    x: 80,
+                    verticalAlign: 'top',
+                    y: 10,
+                    floating: true,
+                    backgroundColor: '#FFFFFF'
+                },
+                series: [{
+                    name: '<%= t :key=>'weighing.index.table.weight', :default=>'Weight' %>',
+                    color: '#6FB896',
+                    type: 'area',
+                    yAxis: 1,
+                    data: <%= @weight_data_round %>
+        
+                }
+                
+                
+
+                ]
+            });
+        });
+        
+    });
+    </script>  
+
+
+      
+        
+
+  </content-body:>
+</page>

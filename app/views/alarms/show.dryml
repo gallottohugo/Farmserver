@@ -1,0 +1,25 @@
+<page title="#{ht 'alarm.show.title', :default=>['Alarm'], :name => name(:no_wrapper => true) }" without-aside >
+
+    <body: class="show-page alarm" />
+
+    <content-header: >
+      <h2 class="heading">
+        <ht key="alarm.show.heading" name="#{name(:no_wrapper => true)}">
+          Alarm <name/>
+        </ht>
+      </h2>
+
+      <record-flags fields="status" />
+
+      <a action="edit" if="&can_edit?" class="edit-link">
+        <ht key="alarm.actions.edit" name="#{name(:no_wrapper => true)}">
+          Edit Alarm
+        </ht>
+      </a>
+    </content-header:>
+
+    <content-body: >
+      <view:description class="description" />
+    </content-body:>
+
+  </page>

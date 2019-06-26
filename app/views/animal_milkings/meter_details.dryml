@@ -1,0 +1,26 @@
+<page  title="Meters details">
+  
+  <body: class="index-page animal"/>
+  <content-body: style="margin:0px 0px 0px 5px">
+
+    <div class="title">Detalles del medidor Nº #{@meter}</div>
+
+
+    <table class="table table-hover" >
+        <tr>
+          <th id="small"><t key="animals.index.table.eartag" default="Eartag" /></th>
+          <th id="small"><t key="animals.table.kg" default="Kg." /></th>
+          <th id="small"><t key="animals.table.conductivity" default="Conductivity" /></th> 
+          <th id="small"><t key="animals.table.temperature" default="Temperature" /></th>
+        </tr>
+        <% @meter_details.each do |md| %>
+          <tr onclick="">
+            <td id="value">#{md.eartag}</td>
+            <td id="value">#{md.volume}</td>
+            <td id="value">#{md.conductivity}</td>
+            <td id="value">#{md.temperature}</td>    
+          </tr>
+        <% end %>
+      </table>    
+  </content-body:>
+</page>

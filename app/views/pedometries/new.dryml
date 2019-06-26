@@ -1,0 +1,17 @@
+<page title="#{ht 'pedometry.new.title', :default=>[' New Pedometry'] }">
+  <body: class="new-page pedometry" />
+
+  <content-header: >
+    <h2 class="heading">
+      <ht key="pedometry.new.heading">
+        New Pedometry
+      </ht>
+    </h2>
+  </content-header:>
+
+  <content-body: >
+    <form style="color:black" >
+      <submit: label="#{ht 'pedometry.actions.create', :default=>['Create Pedometry']}"/>
+    </form>
+  </content-body:>
+</page>

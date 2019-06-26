@@ -1,0 +1,376 @@
+<page title="#{ht 'animal.show.title', :default=>['Animal'], :name => name(:no_wrapper => true) }" without-aside >
+  
+  <custom-stylesheets:> 
+      <animal-stylesheet/>
+  </custom-stylesheets:>
+
+  <body: class="show-page animal" />
+
+  <content-body: style="margin:0px 0px 0px 5px;">
+  
+
+    <%unless @milking == nil%>
+     
+
+      <div class="title titleBoxLarge"><t key="animals.show.title" default="Details milking per animal"/></div>
+          <br/>
+          <div class="boxLarge boxLargeA">        
+      <div class="boxSmall boxSmallA" style="margin:0px 0px 0px 0px">
+        <div class="pad">
+          <div class="eartag">         
+            <div class="padEartag" style="color:black">
+              <%=  @animal.rp_number %>
+            </div>  
+          </div>
+        </div>
+      </div>            
+      <div class="boxSmall boxSmallA" style="height:100px;width:148px;color:#6FB896"> 
+        <div class="padName">
+          <%= @animal.long_name %>
+        </div>
+        <img src="/assets/picture.png" class="conteinerPicture"/>
+      </div>       
+    </div>
+
+    <div class="mobilClear"/>
+    
+    <div class="conteinerDetails">
+      <div class="values">
+        <p id="title"><t key="animals.show.details.date" default="Date"/></p>
+        <p id="detail" style="padding-top:30px;"><%= @date_session %></p>
+        <p id="detail"><%= @time_session %></p>       
+      </div>
+      
+      <div class="values" style="width:130px;">
+        <p id="title"><t key="animals.show.details.values" default="Values"/></p>
+        <p id="detail" style="padding-top:30px;"><%= @milking.volume%> kg</p>
+        <p id="detail"><%=@milking.conductivity%>-<%= @milking.temperature%>°</p>
+      </div>
+    </div>
+    
+    <div class="mobilClear"/>
+
+    <a href="/animal_milkings/table_milking?id=#{@animal.rp_number}">
+       <div class="boxSmall button-table">      
+          <div class="detail1" style=""><t key="animals.show.showtable" default="Show on table"/></div>            
+          <img class="containerImg img-table"/>
+       </div>
+    </a>
+
+    <a target="_blank" href="http://www.tambero.com/animals/#{ @animal.tambero_id }">
+      <div class="boxSmall button-tambero">        
+            <div class="detail1"><t key="animals.show.tambero" default="Gestionar desde Tambero.com"/></div>  
+            <img class="containerImg img-tambero" />
+      </div>
+    </a>
+        <div class="clean"></div>
+        <br/>
+
+        <div class="separator"><t key="animals.show.separatorAnimal" default="Details of animal"/></div>
+        
+        <div>
+          <div class="conteinerInfoAnimal">
+            <div class="infoAnimal">
+              <t key="animals.show.detailsAnimal.breed" default="Breed"/>
+            </div>
+          </div>
+          <div class="conteinerInfoAnimal">
+            <div class="infoAnimal">
+              <t key="animals.show.detailsAnimal.sex" default="Sex"/>
+            </div>
+          </div>
+          <div class="conteinerInfoAnimal">
+            <div class="infoAnimal">
+              <t key="animals.show.detailsAnimal.birth_day" default="Birth date"/>
+            </div>     
+          </div>
+          <div class="conteinerInfoAnimal">
+            <div class="infoAnimal">
+              <t key="animals.show.detailsAnimal.rp_dam" default="Rp mother"/>
+            </div>
+          </div>
+          <div class="conteinerInfoAnimal">
+            <div class="infoAnimal">
+              <t key="animals.show.detailsAnimal.rp_sire" default="Rp father"/>
+            </div>
+          </div>
+          <div class="conteinerInfoAnimal">
+            <div class="infoAnimal">
+              <t key="animals.show.detailsAnimal.species_type" default="Species type"/>
+              
+            </div>
+          </div>
+          <div class="conteinerInfoAnimal">
+            <div class="infoAnimal">
+              <t key="animals.show.detailsAnimal.comments" default="Comments"/>
+            </div>
+          </div>
+
+          <div class="clean"/>
+
+          <div class="conteinerAnimalDetail">
+            <div class="AnimalDetail">
+              <%= if @animal.breed
+                @animal.breed
+              end %>
+            </div>
+          </div>
+          <div class="conteinerAnimalDetail">
+            <div class="AnimalDetail">
+              <% if @animal.male == 1%>
+                <t key="animals.show.detailsAnimal.male" default="Male"/>
+              <%else%>
+                <t key="animals.show.detailsAnimal.female" default="Female"/>
+              <%end%>
+            </div>
+          </div>
+          <div class="conteinerAnimalDetail">
+            <div class="AnimalDetail">
+              <%= if @birth
+                @birth
+              end %>
+            </div>     
+          </div>
+          <div class="conteinerAnimalDetail">
+            <div class="AnimalDetail">
+              <%= if @animal.rp_dam
+                @animal.rp_dam
+              end %>
+            </div>     
+          </div>
+          <div class="conteinerAnimalDetail">
+            <div class="AnimalDetail">
+              <%= if @animal.rp_sire
+                @animal.rp_sire
+              end %>
+            </div>     
+          </div>
+          <div class="conteinerAnimalDetail">
+            <div class="AnimalDetail">
+              <%= if @animal.species_type
+                @animal.species_type.to_html
+              end %>
+            </div>     
+          </div>
+          <div class="conteinerAnimalDetail">
+            <div class="AnimalDetail">
+              <%= if @animal.comment_state
+                  @animal.comment_state
+                 end %>
+            </div>     
+          </div>
+        </div>
+
+        <div class="clean"/>  
+        <br/>
+        <br/>
+        <div class="separator"><t key="animals.show.separatorMilking" default="Detail of the last milking"/></div>
+          <table class="table table-stripped">
+            <tr>
+              <th id="small"><t key="animals.table.date" default="Date" /></th>
+              <th id="small"><t key="animals.table.duration" default="Durtion" /></th>
+              <th id="small"><t key="animals.table.kg" default="Kg." /></th>
+              <th id="small"><t key="animals.table.conductivity" default="Conductivity" /></th>
+              <th id="small"><t key="animals.table.temperature" default="Teperature" /></th>
+              <th id="small">Caudal</th>
+            </tr>
+            <% if @duration == 0 %>
+              <tr>
+                <td id="value"> - </td>
+                <td id="value"> - </td>
+                <td id="value"> - </td>
+                <td id="value"> - </td>
+                <td id="value"> - </td>
+                <td id="value"> - </td>
+              </tr>
+            <% else %>
+              <tr>
+                <td id="value"><%= @milking.created_at.strftime("%d/%m/%Y %H:%M")%> </td>
+                <td id="value"><%= @duration.round(2) %> min. </td>
+                <td id="value"><%= @milking.volume %> </td>
+                <td id="value"><%= @milking.conductivity %></td>
+                <td id="value"><%= @milking.temperature %></td>
+                <td id="value">                  
+                  <a id="link" href="/animal_milkings/table?animalmilking=#{@milking.id.to_s}&id_animal=#{@animal.rp_number}" class="buton">Ver en Tabla</a>
+                  <a id="link" href="/animal_milkings/graphic?animalmilking=#{@milking.id.to_s}&id_animal=#{@animal.rp_number}" class="buton">Ver en Gráfico</a>
+                </td> 
+              </tr>
+            <% end %>                 
+          </table>
+        <br/>
+        
+        <div class="separator"><t key="animals.show.separator_graphic" default="Milking chart" /> </div>
+         
+            <div class='span4'>             
+              <div class='row'>
+                <div class='span10'>
+                  <div class="conteinerGraphic" id='container'/>
+                </div>
+                <div class='span2'>
+                  <p id='choices'></p>
+                </div>
+              </div>
+            </div>
+              
+        
+            <script type="text/javascript">
+              $(function () {
+                  var chart;
+                  $(document).ready(function() {
+                      chart = new Highcharts.Chart({
+                          chart: {
+                              renderTo: 'container',
+                              zoomType: 'xy'
+                          },
+                          title: {
+                              text: '<%= t :key=>'animals.graphic.title1', :default=>'Milking history' %>'
+                          },
+                          subtitle: {
+                              text: ''
+                          },
+                          xAxis: [{
+                              categories:  <%= @time%>
+                          }],
+                          yAxis: [{ // Primary yAxis
+                          labels: {
+                              formatter: function() {
+                                  return this.value +' Cond.';
+                              },
+                              style: {
+                                  color: '#84A225'
+                              }
+                          },
+                          title: {
+                              text: '<%= t :key=>'animals.graphic.conductivity', :default=>'Conductivity' %>',
+                              style: {
+                                  color: '#84A225'
+                              }
+                          },
+                          opposite: true
+              
+                      }, { // Secondary yAxis
+                          gridLineWidth: 0,
+                          title: {
+                              text: '<%= t :key=>'animals.graphic.pro_milk', :default=>'Milk production' %>',
+                              style: {
+                                  color: '#6FB896'
+                              }
+                          },
+                          labels: {
+                              formatter: function() {
+                                  return this.value +' Kg';
+                              },
+                              style: {
+                                  color: '#6FB896'
+                              }
+                          }
+              
+                      }, { // Tertiary yAxis
+                          gridLineWidth: 0,
+                          title: {
+                              text: '<%= t :key=>'animals.graphic.temperature', :default=>'Temperature' %>',
+                              style: {
+                                  color: '#EC6608'
+                              }
+                          },
+                          labels: {
+                              formatter: function() {
+                                  return this.value +' °C';
+                              },
+                              style: {
+                                  color: '#EC6608'
+                              }
+                          },
+                          opposite: true
+                      }],
+                      tooltip: {
+                          formatter: function() {
+                              var unit = {
+                                  'Leche': 'Kg',
+                                  'Conductividad': 'Cond.',
+                                  'Temperatura': '°C'
+                              }[this.series.name];
+              
+                              return ''+
+                                  this.x +': '+ this.y +' '+ unit;
+                          }
+                      },
+                      legend: {
+                          layout: 'vertical',
+                          align: 'left',
+                          x: 80,
+                          verticalAlign: 'top',
+                          y: 10,
+                          floating: true,
+                          backgroundColor: '#FFFFFF'
+                      },
+                      series: [{
+                          name: '<%= t :key=>'animals.graphic.milk', :default=>'Milk' %>',
+                          color: '#6FB896',
+                          type: 'area',
+                          yAxis: 1,
+                          data: <%= @volume_data%>
+              
+                      }, {
+                          name: '<%= t :key=>'animals.graphic.temperature', :default=>'Temperature' %>',
+                          type: 'spline',
+                          color: '#EC6608',
+                          yAxis: 2,
+                          data: <%= @temperature_data%>,
+                          marker: {
+                              enabled: false
+                          },
+                          dashStyle: 'shortdot'
+              
+                      }, {
+                          name: '<%= t :key=>'animals.graphic.conductivity', :default=>'Conductivity' %>',
+                          color: '#84A225',
+                          type: 'spline',
+                          data: <%= @conductivity_data %> 
+                  }
+                      , {
+                          name: '<%= t :key=>'animals.graphic.podometry', :default=>'Podometry' %>',
+                          color: '#380F00',
+                          type: 'spline',
+                          data: 0
+                  }
+                ]
+                  });
+              });
+              
+             });
+            </script>  
+    <%else%>
+    <div class="title titleBoxLarge"><t key="animals.table.title" default="Details of milking per animal" /></div>
+    <br/>
+    <div class="boxLarge boxLargeA">        
+      <div class="boxSmall boxSmallA" style="margin:0px 0px 0px 0px">
+        <div class="pad">
+          <div class="eartag">         
+            <div class="padEartag" style="color:black">
+              <%=  @animal.rp_number %>
+            </div>  
+          </div>
+        </div>
+      </div>            
+      <div class="boxSmall boxSmallA" style="height:100px;width:148px;color:#6FB896"> 
+        <div class="padName">
+          <%= @animal.long_name %>
+        </div>
+        <img src="/assets/picture.png" class="conteinerPicture"/>
+      </div>       
+    </div>
+    <div class="mobilClear"/>  
+    <div class="clean"/>
+    <br/>
+    <br/>
+    <div class="title titleBoxLarge">El animal no posee ordeñes</div>
+    <%end%>      
+              
+
+
+
+
+  </content-body:>
+
+</page>

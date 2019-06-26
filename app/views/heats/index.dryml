@@ -1,0 +1,151 @@
+<page title="#{ht 'heat.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page heat" />
+
+    <content-header: >
+          <div class="title" ><t key="heats.index.title" default="Heats"/></div>
+    </content-header:>
+
+    <content-body: >
+      <div class="clean"></div>
+      <table class="table table-hover" >
+          <tr>
+              <th style="text-align:center"><t key="heats.index.table.date" default="Date and Time"/></th>
+              <th style="text-align:center"><t key="heats.index.table.eartag" default="Eartag"/></th>
+              <th style="text-align:center"><t key="heats.index.table.temp" default="Temperature"/></th>
+              <th style="text-align:center"><t key="heats.index.table.avg_temp" default="Average per milking"/></th>
+              <th style="text-align:center"><t key="heats.index.table.avg_step_animal" default="Average steps per hour"/></th> 
+              <th style="text-align:center"><t key="heats.index.table.avg_step_herd" default="Average steps per hour and herd"/></th> 
+              <th style="text-align:center"><t key="heats.index.table.probability_tambero" default="Tambero.com probability"/></th> 
+              <th style="text-align:center"><t key="heats.index.table.probability_heat" default="Heat probability"/></th> 
+              <th style="text-align:center"><t key="heats.index.table.last_confirm" default="Confirmed last heat"/></th>
+              <th style="text-align:center"><t key="heats.index.table.confirm" default="Confirm"/></th>
+          </tr>
+
+
+
+
+          <% @heats_table.each do |h|
+                @avg_activity_animal = Pedometry.find(h.id_pe.to_i).step_per_hour
+                @avg_activity_herd   = Pedometry.find(h.id_pe.to_i).step_per_hour_herd
+
+                @per_diff_p = (@avg_activity_animal * 100 ) / @avg_activity_herd
+                @new_avg_activity_herd = (@avg_activity_herd.to_i * @avg_p.to_i) / 100
+                
+                if @avg_activity_animal.to_i > @new_avg_activity_herd.to_i then 
+                    @heat_step = true
+                else
+                    @heat_step = false
+                end
+
+                @avg_temperature_session = AnimalMilking.find(h.id_am.to_i).avg_temperature_session.to_i
+                @temp_final = (@avg_temperature_session * @avg_t.to_i) / 100
+                @per_diff_t = (h.temperature.to_f * 100 ) / @avg_temperature_session.to_f
+                
+                if h.temperature.to_i > @temp_final then
+                  @heat_temp = true
+                else
+                  @heat_temp = false
+                end
+
+                
+                #Busco las imaenes de celo o los dias de preñes
+                @image_heat = HeatTambero.where("eartag = ?", h.eartag).last.heat_icon.split('/').last
+                @pregnancy = HeatTambero.where("eartag = ?", h.eartag).last.pregnancy
+                unless @pregnancy == "false" then
+                  @image_pregnancy = @pregnancy
+                end
+                #Busco la ultima fecha de celo confirmado
+                if @last_date_confirm = Heat.where("eartag = ? and confirm = ?", h.eartag, true).last then
+                  @days_confirm = ( DateTime.now - @last_date_confirm.detected_at.to_datetime).to_i
+                end
+                
+
+                if @heat_temp == true and @heat_step == true  and @image_heat != "false" then 
+                    @heat_edit = Heat.where("eartag = ?", h.eartag).last %>
+                    <tr>                        
+                        <td id="value_true"> <%= h.date_start_at.localtime(@time_zone).strftime("%d/%m/%Y - %H:%M:%S") %> </td>
+                        <td id="value_true"> <%= h.eartag %> </td>
+                        <td id="value_true"> <%= h.temperature %>°C <div style="font-size: 12px">(<%= @per_diff_t.round(2) %>%)</div></td>
+                        <td id="value_true"> <%= @avg_temperature_session.to_s %>°C</td>
+                        <td id="value_true"> <%= @avg_activity_animal.to_s %> <div style="font-size: 12px">(<%= @per_diff_p.round(2)%>%)</div></td>
+                        <td id="value_true"> <%= @avg_activity_herd.to_s %> </td>
+                        <td id="value_false"><image src="/assets/heat_icons/#{@image_heat}" style="width:40px; height:40px"/></td>                          
+                        <td id="value_true"> <t key="heats.index.table.probability_heat" default="Heat probability"/></td>
+
+                        <% if @days_confirm then 
+                            if @days_confirm == 1 then %>
+                                <td id="value_true" style="color:#EC6608"><t key="heats.index.table.atention" default="Atention: "/><%= @days_confirm.to_s  %> <t key="heats.index.table.ago_1" default="day ago: "/></td>
+                            <% else %>
+                                <td id="value_true" style="color:#EC6608"><t key="heats.index.table.atention" default="Atention: "/><%= @days_confirm.to_s  %> <t key="heats.index.table.ago" default="days ago: "/></td>                            
+                            <% end 
+                        else %>
+                            <td id="value_true" style="color:#EC6608"></td>
+                        <% end %>
+                    
+                        <td id="value_true"> 
+                            <% if @heat_edit.confirm == true then %>
+                                <input name="#{h.eartag}" id="#{h.eartag}" checked="checked" type="checkbox" class="input-large" />
+                                <br/>
+                                <label id="label_heat" name="label_heat"  style="width:100px;font-size:12px">Celo Confirmado</label>
+                            <% else %>
+                                <input name="#{h.eartag}" id="#{h.eartag}"  type="checkbox" class="input-large" />
+                                <br/>
+                                <label id="label_heat" name="label_heat" style="width:100px;font-size:12px"></label>
+                            <% end %>
+
+                            <script type="text/javascript">
+                                $('.input-large').click(function() {
+                                    var checked; 
+                                    var label = document.getElementsByName('label_heat').label;
+                                    if ($(this).is(':checked')) {
+                                        checked = true;
+                                        document.all("label_heat").innerText = "Celo confirmado";
+                                    } else {
+                                        checked = false;
+                                        document.all("label_heat").innerText = " ";
+                                    } 
+                                    $.ajax({
+                                        type: "get",
+                                        url: "/heats/#{@heat_edit.id}/edit",
+                                        data: { id: $(this).data('post-id'), checked: checked }
+                                    });     
+                                });
+                            </script>
+                        </td>
+                    </tr>
+                <% else %>
+                    <tr>                        
+                        <td id="value_false"> <%= h.date_start_at.localtime(@time_zone).strftime("%d/%m/%Y - %H:%M:%S") %> </td>
+                        <td id="value_false"> <%= h.eartag %> </td>
+                        <% if @heat_temp == true then %>
+                            <td id="value_true"> <%= h.temperature %>°C <div style="font-size: 12px">(<%= @per_diff_t.round(2) %>%)</div></td>
+                            <td id="value_true"> <%= @avg_temperature_session.to_s %>°C</td>
+                        <% else %>
+                            <td id="value_false"> <%= h.temperature %>°C (<%= @per_diff_t.round(2) %>%)</td>
+                            <td id="value_false"> <%= @avg_temperature_session.to_s %>°C</td>
+                        <% end 
+                        if @heat_step == true then %>
+                            <td id="value_true"> <%= @avg_activity_animal.to_s %> <div style="font-size: 12px">(<%= @per_diff_p.round(2) %>%)</div></td>
+                            <td id="value_true"> <%= @avg_activity_herd.to_s %> </td>
+                        <% else %>
+                            <td id="value_false"> <%= @avg_activity_animal.to_s %> (<%= @per_diff_p.round(2) %>%) </td>
+                            <td id="value_false"> <%= @avg_activity_herd.to_s %> </td>
+                        <% end 
+                            unless @image_heat == "false" %>
+                                <td id="value_false" style="margin:auto"><image src="/assets/heat_icons/#{@image_heat}" style="width:40px; height:40px;"/></td>
+                            <% else 
+                                unless @pregnancy == "false" then %>
+                                    <td id="value_false"><t key="heats.index.table.pregnancy" default="Pregnancy: "/><%= @pregnancy.to_s %> <t key="heats.index.table.days" default="days"/></td>
+                                <% else %>  
+                                    <td id="value_false"> </td>
+                                <% end %>
+                            <% end %>
+                        <td id="value_false"> </td>
+                        <td id="value_false"> <%= @days_confirm.to_s %></td>
+                        <td id="value_false"> </td>
+                    </tr>
+                <% end 
+          end %>
+      </table>
+    </content-body:>
+  </page>  

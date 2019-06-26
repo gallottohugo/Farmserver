@@ -1,0 +1,252 @@
+<!-- AUTOMATICALLY GENERATED FILE - DO NOT EDIT -->
+
+
+<def tag="form" for="AlarmAssignation">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="eartag, number_alarm" param/>
+    <div param="actions">
+      <submit label="#{ht 'alarm_assignation.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="Alarm">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="name, description, status" param/>
+    <div param="actions">
+      <submit label="#{ht 'alarm.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="AnimalMilkingDetail">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="time_at, conductivity, temperature, volume, flow, animal_milking" param/>
+    <div param="actions">
+      <submit label="#{ht 'animal_milking_detail.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="AnimalMilking">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="date_start_at, date_end_at, conductivity, temperature, volume, eartag, meter, milking_session" param/>
+    <div param="actions">
+      <submit label="#{ht 'animal_milking.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="Animal">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="inactivated_at, long_name, id_fiscal, male, breed, weight, origin, birth_date_at, state, comment_state, rp_number, rp_sire, rp_dam, species_type, life_production, rfid_tag" param/>
+    <div param="actions">
+      <submit label="#{ht 'animal.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="ApiTransfer">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="process_type, process_name, date_at, result, code_error, error" param/>
+    <div param="actions">
+      <submit label="#{ht 'api_transfer.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="Feeder">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="name, number" param/>
+    <div param="actions">
+      <submit label="#{ht 'feeder.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="HeatTambero">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="heat_icon, eartag, pregnancy" param/>
+    <div param="actions">
+      <submit label="#{ht 'heat_tambero.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="Heat">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="detected_at, detected_method, comments, milk_temerature, activity, probability_tambero, eartag, confirm, transferred, milking_session" param/>
+    <div param="actions">
+      <submit label="#{ht 'heat.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="MilkingMachineRead">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="eartag, volume, temperature, conductivity, state, flow, meter, milking_current" param/>
+    <div param="actions">
+      <submit label="#{ht 'milking_machine_read.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="MilkingMachine">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="number" param/>
+    <div param="actions">
+      <submit label="#{ht 'milking_machine.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="MilkingSession">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="date_at, status" param/>
+    <div param="actions">
+      <submit label="#{ht 'milking_session.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="NotificationMessage">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="name, message, source, code, status, link, color, type_message" param/>
+    <div param="actions">
+      <submit label="#{ht 'notification_message.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="Pedometry">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="battery, dated_at, steps_number, real_steps, lying_time, walking_time, standing_time, eartag, milking_session" param/>
+    <div param="actions">
+      <submit label="#{ht 'pedometry.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="Scale">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="number, name" param/>
+    <div param="actions">
+      <submit label="#{ht 'scale.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="TamberoApi">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="tambero_api_key, tambero_last_upload_at, time_zone, end_milking, min_milking, language, installed_version, current_version, days_without_connexion, pedometry_module, weighing_module, update_pedometer, per_temperature, per_activity, heat_module, period_between_heats" param/>
+    <div param="actions">
+      <submit label="#{ht 'tambero_api.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="User">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="name, email_address, administrator, state" param/>
+    <div param="actions">
+      <submit label="#{ht 'user.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+<def tag="signup-form" polymorphic/>
+<def tag="signup-form" for="User">
+  <form lifecycle="signup" merge param="default">
+    <error-messages param/>
+    <field-list fields="name, email_address, password, password_confirmation" param/>
+    <div param="actions">
+      <submit label="#{ht 'user.actions.signup', :default=>['Signup']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+<def tag="reset-password-form" polymorphic/>
+<def tag="reset-password-form" for="User">
+  <form lifecycle="reset_password" merge param="default">
+    <error-messages param/>
+    <input type="hidden" name="key" value="&this.lifecycle.provided_key" if="&this.lifecycle.provided_key"/>
+    <field-list fields="password, password_confirmation" param/>
+    <div param="actions">
+      <submit label="#{t 'activerecord.attributes.user.lifecycle.transitions.reset_password', :default=>['Reset Password']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+<def tag="form" for="WeighingSession">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="dated_at, status" param/>
+    <div param="actions">
+      <submit label="#{ht 'weighing_session.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+
+<def tag="form" for="Weighing">
+  <form merge param="default">
+    <error-messages param/>
+    <field-list fields="dated_at, hour, weight, eartag, comments, weighing_session" param/>
+    <div param="actions">
+      <submit label="#{ht 'weighing.actions.save', :default=>['Save']}" param/><or-cancel param="cancel"/>
+    </div>
+  </form>
+</def>
+
+
+

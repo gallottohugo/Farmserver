@@ -1,0 +1,164 @@
+<page  title="Tabla de animales">
+
+  
+  
+  <body: class="index-page animal"/>
+  <content-body: style="margin:0px 0px 0px 5px">
+         
+    <div class="title titleBoxLarge"><t key="animalMilking.animalMilkingSession.title" default="Details control milking"/></div>
+      <br/>
+      <br/>
+      <div>  
+        <div class="conteinerSubtitle"> 
+          <div class="subtitle"><t key="animalMilking.animalMilkingSession.details.date" default="Date"/></div>
+        </div>
+        <div class="conteinerSubtitle">
+          <div class="subtitle"><t key="animalMilking.animalMilkingSession.details.start" default="Start"/></div>
+        </div>
+        <div class="conteinerSubtitle"> 
+          <div class="subtitle"><t key="animalMilking.animalMilkingSession.details.end" default="End"/></div>
+        </div>
+        <div class="conteinerSubtitle"> 
+          <div class="subtitle"><t key="animalMilking.animalMilkingSession.details.duration" default="Duration"/></div>
+        </div>
+        <div class="conteinerSubtitle"> 
+          <div class="subtitle"><t key="animalMilking.animalMilkingSession.details.volume" default="Volume"/></div>
+        </div>
+        <div class="conteinerSubtitle"> 
+          <div class="subtitle"><t key="animalMilking.animalMilkingSession.details.average" default="Average"/></div>
+        </div>
+
+        <div class="limpiar"></div>
+          <% @session = @milking_session.last%>
+          <% @duration = @session.final - @session.inicio %>
+        <div class="conteinerInfo"> 
+          <div class="info"><%= @session.date_at.strftime("%d/%m/%Y")%></div>
+        </div>
+        <div class="conteinerInfo">
+          <div class="info"><%= @session.inicio.strftime("%d/%m/%Y - %H:%M")%></div>
+        </div>
+        <div class="conteinerInfo">
+          <div class="info"><%= @session.final.strftime("%d/%m/%Y - %H:%M")%></div>
+        </div>
+        <div class="conteinerInfo">
+          <div class="info"><%= Time.at(@duration).utc.strftime("%H:%M:%S")%></div>
+        </div>
+        <div class="conteinerInfo">
+          <div class="info"><%= @session.volume.round(2)%> kg.</div>
+        </div>
+        <div class="conteinerInfo">
+          <div class="info"><%= @session.promedio.round(2)%> kg.</div>
+        </div>
+    </div>
+    <div class="clean"/>
+    <br/>
+    
+
+    <div class="separator menu" id="menu"><t key="animalMilking.animalMilkingSession.separator1" default="Details of meters"/></div>
+    <br/>
+      
+        <div class="conteinerMeters">
+          <% @meters = MilkingMachine.all
+            @meters.each do |m| 
+              @meter = m.number %>
+
+              <a href="/animal_milkings/meter_details?meter=#{@meter}&session=#{@session.id}">
+                <div class="boxMeter">
+                  Medidor Nº #{@meter}
+                  
+                  <% @animals_meter = AnimalMilking.find_by_sql(["select count(eartag) cant from animal_milkings where meter = ? and milking_session_id = ?", @meter, @session.id])
+                      @animals_meter.each do |am| 
+
+                        if am.cant == 0 or am.cant == nil  %>
+                          <div class="boxMeterInfo" style="color:#EC6608">
+                            Animales: #{am.cant}
+                          </div>
+                        <% else %>
+                          <div class="boxMeterInfo" style="color:#84A225">
+                            Animales: #{am.cant}
+                          </div>
+                        <% end 
+                         
+                        @lts_meter = AnimalMilking.find_by_sql(["select sum(volume) cant from animal_milkings where meter = ? and milking_session_id = ?", @meter, @session.id]) 
+                            @lts_meter.each do |lm| 
+                              if lm.cant == nil
+                                @kg = 0
+                              else
+                                @kg = lm.cant.round(2) 
+                              end 
+                                if @kg == 0 %>
+                                  <div class="boxMeterInfo" style="color:#EC6608">
+                                    Kg: #{@kg}
+                                  </div>
+                                <% else %>
+                                  <div class="boxMeterInfo" style="color:#84A225">
+                                    Kg: #{@kg}
+                                  </div>
+                                <% end 
+                              end %>
+                </div> 
+              <% end %>
+            </a>
+        <% end %>
+      </div>
+    
+
+
+    <div class="clear mobilClear"/>
+    <div class="separator"><t key="animalMilking.animalMilkingSession.separator" default="Details of milking per animal"/></div>
+    <br/>
+    <table class="table table-stripped table-hover">
+        <tr>
+            <th><t key="animalMilking.animalMilkingSession.table.eartag" default="Eartag"/></th>
+            <th><t key="animalMilking.animalMilkingSession.table.start" default="Start"/></th>
+            <th><t key="animalMilking.animalMilkingSession.table.end" default="End"/></th>
+            <th><t key="animalMilking.animalMilkingSession.table.duration" default="Duration"/></th>
+            <th><t key="animalMilking.animalMilkingSession.table.total" default="Total"/></th>            
+        </tr>
+        <%  @table_animal_milking.each do |t|            
+              @unknow_eartag = Animal.where("rp_number = ?", t.eartag)
+              if @unknow_eartag == nil  or @unknow_eartag == [] %>
+                <tr>            
+                  <td id="value" style="color:red"> <%= t.eartag %> </td>         
+                  <td id="value" style="color:red"> <%= t.created_at.strftime("%d/%m/%Y - %H:%M:%S") %> </td>
+                  <td id="value" style="color:red"> <%= t.updated_at.strftime("%d/%m/%Y - %H:%M:%S") %> </td>
+                    <% @duration = t.updated_at - t.created_at %>
+                  <td id="value" style="color:red"> <%= Time.at(@duration).utc.strftime("%M:%S")%> min. </td>
+                  <td id="value" style="color:red"> <%= t.volume %> kg. </td>     
+                </tr>
+              <% else %>
+                <tr class="linkrow" onclick="location.href='/animal_milkings/graphic?animalmilking=#{t.id}&id_animal=#{t.eartag}'" >            
+                    <td id="value"> <%= t.eartag %> </td>         
+                    <td id="value"> <%= t.created_at.strftime("%d/%m/%Y - %H:%M:%S") %> </td>
+                    <td id="value"> <%= t.updated_at.strftime("%d/%m/%Y - %H:%M:%S") %> </td>
+                      <% @duration = t.updated_at - t.created_at%>
+                    <td id="value"> <%= Time.at(@duration).utc.strftime("%M:%S")%> min. </td>
+                    <td id="value"> <%= t.volume %> kg. </td>     
+                </tr>
+              <% end %>            
+        <% end %>         
+    </table>
+
+    <div class="clear mobilClear"/>
+    <div class="separator"><t key="animalMilking.animalMilkingSession.separator2" default="Animales que no ingresaron a la sesión"/></div>
+    
+    <table class="table table-stripped table-hover">
+        <tr>
+            <th><t key="animalMilking.animalMilkingSession.table.eartag" default="Eartag"/></th>
+            <th><t key="animalMilking.animalMilkingSession.table.name" default="Name"/></th>
+            <th><t key="animalMilking.animalMilkingSession.table.breed" default="Breed"/></th>
+            <th><t key="animalMilking.animalMilkingSession.table.detail" default="Detail"/></th>
+        </tr>
+        <% @inactive_table.each do |it| %>
+            <tr>            
+                <td id="value"> <%= it.rp_number %> </td>         
+                <td id="value"> <%= it.long_name %> </td>
+                <td id="value"> <%= it.breed %> </td>
+                <td id="value"> - </td>
+            </tr>
+        <% end %>         
+    </table>
+
+    
+  </content-body:>
+</page>

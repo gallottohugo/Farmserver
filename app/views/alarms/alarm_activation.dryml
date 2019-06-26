@@ -1,0 +1,10 @@
+<page title="#{ht 'alarm.index.title_1', :default=>[' Alarms Activation'] }">
+    <body: class="new-page alarm" />
+
+    <content-body: >
+      
+
+
+     
+    </content-body:>
+  </page>

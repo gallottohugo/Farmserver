@@ -1,0 +1,67 @@
+<page title="#{ht 'user.signup.title', :default=>['Signup']}" >
+    
+
+    <body: class="lifecycle-start-page signup-page" />
+
+    <content-header: style="margin:0px 0px 0px 50px " >
+      <div class="title">
+        <t key="user.signup.title" default="Signup"/>
+      </div>
+    </content-header:>
+
+    <content-body: >
+      <div class="conteinerSignup">
+        <form lifecycle="signup"  class="default">
+          <error-messages />
+          <field-list fields="name, email_address, password, password_confirmation">
+
+            <name-label:>
+              <div class="label_login label_login_mobie"><t key="user.signup.name" default="Name"/></div>
+            </name-label:>
+            <name-view:>
+              <div class="input_login input_login_mobile">
+                <input class="input_login input_login_mobile" />
+              </div>
+              <br/>
+            </name-view:>
+
+            <email-address-label:>
+              <div class="label_login label_login_mobie"><t key="user.signup.email" default="E-mail"/></div>
+            </email-address-label:>
+            <email-address-view:>
+              <div class="input_login input_login_mobile">
+                <input class="input_login input_login_mobile" />
+              </div>
+              <br/>
+            </email-address-view:>
+
+            <password-label:>
+              <div class="label_login label_login_mobie"><t key="user.signup.password" default="Password"/></div>
+            </password-label:>
+            <password-view:>
+              <div class="input_login input_login_mobile">
+                <input class="input_login input_login_mobile" />
+              </div>
+              <br/>
+            </password-view:>
+
+            <password-confirmation-label:>
+              <div class="label_login label_login_mobie"><t key="user.signup.password_confirmation" default="Password confirmation"/></div>
+            </password-confirmation-label:>
+            <password-confirmation-view:>
+              <div class="input_login input_login_mobile ">
+                <input class="input_login input_login_mobile" />
+              </div>
+            </password-confirmation-view:>
+          </field-list>
+
+          <div class="actions">
+            <submit label="#{ht 'user.actions.signup', :default=>['Signup']}" /><or-cancel class="cancel"/>
+          </div>
+        </form>       
+      </div>
+    </content-body:>
+</page>
+
+
+

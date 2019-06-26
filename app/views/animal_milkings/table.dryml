@@ -1,0 +1,101 @@
+<page  title="Table">
+
+  <custom-stylesheets:> 
+      <animal-stylesheet/>
+  </custom-stylesheets:>
+
+  <body: class="index-page animal"/>
+  <content-body: style="margin:0px 0px 0px 5px">
+    
+    
+         
+    <div class="title titleBoxLarge"><t key="animals.table.title"  default="" /></div>
+    <br/>
+    <div class="boxLarge boxLargeA">        
+      <div class="boxSmall boxSmallA" style="margin:0px 0px 0px 0px">
+        <div class="pad">
+          <div class="eartag">         
+            <div class="padEartag" style="color:black">
+              <%= unless @animal == nil
+                @animal.rp_number 
+              end%>
+            </div>  
+          </div>
+        </div>
+      </div>            
+      <div class="boxSmall boxSmallA" style="height:100px;width:148px;color:#6FB896"> 
+        <div class="padName">
+          <%= unless @animal == nil
+            @animal.long_name 
+          end %>
+        </div>
+        <img src="/assets/picture.png" class="conteinerPicture"/>
+      </div>       
+    </div>
+    <div class="mobilClear"/>  
+        
+    <div class="values">
+      <p id="title"><t key="animals.show.details.date" default="Date"/></p>
+      <p id="detail" style="padding-top:30px;"><%= @date_session %></p>
+      <p id="detail"><%= @time_session %></p>       
+    </div>
+
+    <div class="values" style="width:130px;">
+      <p id="title"><t key="animals.show.details.values" default="Values"/></p>
+      <p id="detail" style="padding-top:30px;"><%= @milking.volume%> kg</p>
+      <p id="detail"><%=@milking.conductivity%>-<%= @milking.temperature%>°</p>
+    </div>
+
+    <% if @animal
+         @id = @animal.rp_number
+    end%>
+         
+  	<a href="/animal_milkings/graphic?animalmilking=#{ @animal_milking.id }&id_animal=#{ @id }">
+  	    <div class="boxSmall" style="background-color:#EC6608;height:154px; width:145px;text-align:center;">
+  	       <div class="detail1" style=""><t key="animals.show.details.btn_chart" default="View chart"/></div>
+  	       <img class="containerImg" alt="grafico" src="/assets/grafico.png" style="background-size:contain;background-repeat:no-repeat;text-align:center;line-height:140px;"/>
+  	    </div>
+  	</a>
+    <div class="clean"/>
+    <div class="mobilClear"/>  
+    <br/>    
+    <div class="separator separator1" style="color:black"><t key="animalMilking.graphic.meter" default="Meter nro:"/> <%= @meter %></div>
+    <br/>    
+    <br/>    
+    <br/>    
+    <div class="separator separator1"><t key="animals.table.separator" default="Milking evolution table"/></div>
+    <br/>
+    <div class="row">
+      <div class="span12">
+        <table class="table table-stripped">
+          <tr>
+            <th><t key="animals.table.date" default="Date" /></th>
+            <th><t key="animals.table.kg" default="Kg." /></th>
+            <th><t key="animals.table.conductivity" default="Conductivity" /></th>
+            <th><t key="animals.table.temperature" default="Temperature" /></th>
+            <th>Caudal</th>
+          </tr>
+
+            <% @table_flows.each do |tf|%>
+              <tr>
+                <td id="value"><%= tf.created_at.strftime("%d/%m/%Y  %H:%M")%></td>
+                <td id="value"><%= tf.volume %></td>
+                <td id="value"><%= tf.conductivity%></td>
+                <td id="value"><%= tf.temperature%></td>
+                <% if tf.flow %>
+                  <td id="value"><%= tf.flow.round(5).abs %></td>
+                <% end %>
+              </tr>
+            <%end%>         
+        </table>
+      </div>         
+    </div>
+            
+  
+    
+
+
+
+    
+  </content-body:>
+</page>

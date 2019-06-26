@@ -1,0 +1,25 @@
+<page  title="#{ht 'user.show.title', :default=>['User'], :name => name(:no_wrapper => true) }" without-aside >
+
+    <body: class="show-page user" />
+
+    <content-header: >
+      <h2 class="heading">
+        <ht key="user.show.heading" name="#{name(:no_wrapper => true)}">
+          User <name/>
+        </ht>
+      </h2>
+
+      <record-flags fields="administrator" />
+
+      <a action="edit" if="&can_edit?" class="edit-link">
+        <ht key="user.actions.edit" name="#{name(:no_wrapper => true)}">
+          Edit User
+        </ht>
+      </a>
+    </content-header:>
+
+    <content-body: >
+      <field-list fields="email_address, state" style="color:black"/>
+    </content-body:>
+
+</page>

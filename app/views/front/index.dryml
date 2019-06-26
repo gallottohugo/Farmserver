@@ -1,0 +1,410 @@
+<page title="Home">
+
+  <body: class="front-page "/>
+
+  <content:>
+    <header class="body" style="margin:0px 0px 0px 5px ">
+      <br/>    
+      <div class="title"><t key="front.title" default="Summary view"/></div>
+      <br/>
+      
+      <% @unknowneartag = 0
+      unless @table_notification == nil
+        @table_notification.each do |tn| 
+          if tn.source == "inputbackup" %>
+            <a href="#{tn.link}">       
+              <div class="errorbuckup" style="background-color:#{tn.color}"><%= tn.message%></div>
+            </a>
+            <br/>
+            <br/>
+          <% else 
+            if tn.source == "unknowneartag" and @unknowneartag == 1
+              next
+            else
+              @unknowneartag = 1%>
+              <a href="#{tn.link}">       
+              <div class="error" style="background-color:#{tn.color}"><%= tn.message%></div>
+              </a>
+              <br/>
+          <% end
+          end 
+        end
+      end %>
+
+        <a href="/milking_sessions">
+          <div class="boxLarge" style="background-color:#6FB896;">
+            <div class="padi">
+              <div class="textLarge textLarge1" style="padding:0px 0px 5px 0px"><t key="front.milking.title" default="Milkings"/></div>  
+                <div class="pad padDetail">
+                  <div class="detail"><%=  @cant_sessions.count.to_s %> <t key="front.milking.detail" default="Registered milkings."/></div>       
+                </div>
+            </div>      
+          </div>    
+        </a>
+
+        <a href="/animals">
+          <div class="boxLarge" style="background-color:#84A225;">
+            <div class="padi">
+              <div class="textLarge textLarge1" style="padding:0px 0px 5px 0px"><t key="front.animals.title" default="Animals"/></div>  
+              <div class="pad padDetail">
+                <div class="detail"><%= Animal.count.to_s%> <t key="front.animals.detail" default="Registered animals."/></div>       
+              </div>
+            </div>      
+          </div>
+        </a>
+      
+        <a href="/milking_machines">
+          <div class="boxSmall boxSmall_" style="background-color:#EC6608;height:150px; width:145px;text-align:center;">          
+             <div class="detail1" style=""><t key="front.meters" default="Meters" /></div>
+               <img class="containerImg" alt="medidor" src="/assets/medidor.png" style="background-size:contain;background-repeat:no-repeat;text-align:center;line-height:140px;"/>
+          </div>
+        </a>
+        
+        <a href="http://www.tambero.com/front?locale=es_AR" target="_blank">
+          <div class="boxSmall"  style="background-color:#380F00; height:150px; width:145px;text-align:center;">           
+              <div class="detail1" style=""><t key="front.tambero" default="Gestionar desde Tambero.com"/></div>            
+              <img class="containerImg" alt="LogoBlanco" src="/assets/LogoBlanco.png" style="background-size:contain;background-repeat:no-repeat;text-align:center;"/>
+          </div>
+        </a>      
+      </header>
+
+      <section class="content-body" style="margin:0px 0px 0px 5px  ">
+      <div class="clean"></div>
+      <br/>
+      <div class="separator"><t key="front.currentState.title" default="Current State"/></div>
+      <br/>
+
+    
+    <%  if @current_session
+            @dura = (@current_session.date_end - @current_session.date_start)
+            @duration = Time.at(@dura).utc.strftime("%H:%M:%S")
+            @total = @current_session.volume.round(2)
+            @average = @current_session.promedio.round(2)
+            @cant = @current_session.cant
+
+            @animal_minute = @current_session.average_duration_animal
+            @duration_minute = Time.at(@animal_minute).utc.strftime("%H:%M:%S")
+            
+
+            
+            
+            @link = "/milking_sessions/#{@current_session.id}"
+            
+        
+          
+      if @dura.to_f > @last_dura.to_f or @dura.to_f == @last_dura.to_f %>
+        <a href="#{@link}">
+          <div class="boxLarge boxLarge1" style="border: 2px solid #84A225;">
+            <div class="padi1">
+              <div class="textMedium" style="color:black;padding:0px 0px 5px 0px"><t key="front.currentState.duration" default=""/>
+                <div class="padi_up15 padi_up_m100">
+                  <div class="textLarge textLarge1" style="color:#84A225;text-align:center">                 
+                    #{@duration}                   
+                      <div class="padi_up25 padi_up_m100 ">
+                        <div class="detail detail_m" style="color:black;float:left"><t key="front.previousState.duration" default=""/>
+                        </div>
+                        <div class="last_session" style="color:#EC6608">
+                            #{@last_duration}
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>  
+            </div>    
+          </div>
+        </a>
+      <% else %>
+        <a href="#{@link}">
+          <div class="boxLarge boxLarge1" style="border: 2px solid #EC6608;">
+            <div class="padi1">
+              <div class="textMedium" style="color:black;padding:0px 0px 5px 0px"><t key="front.currentState.duration" default=""/>
+                <div class="padi_up15 padi_up_m100">
+                  <div class="textLarge textLarge1" style="color:#EC6608;text-align:center">                 
+                      #{@duration}                   
+                      <div class="padi_up25 padi_up_m100">
+                          <div class="detail detail_m" style="color:black;float:left"><t key="front.previousState.duration" default=""/>
+                          </div>
+                          <div class="last_session" style="color:#84A225">
+                            #{@last_duration}
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </div>  
+            </div>    
+          </div>
+        </a>
+      <% end %>
+
+      <div class="mobilClear"/>
+      <div class="padi_up_m50"/>
+
+      <% if @current_session.cant > @last_cant or @current_session.cant == @last_cant%>
+        <a href="#{@link}">
+          <div class="boxLarge boxLarge1" style="border: 2px solid #84A225;">
+            <div class="padi1">
+              <div class="textMedium" style="color:black;padding:0px 0px 5px 0px"><t key="front.currentState.animals" default=""/>
+                <div class="padi_up15 padi_up_m100">
+                  <div class="textLarge textLarge1" style="color:#84A225;text-align:center">
+                    #{@cant}
+                      <div class="padi_up25 padi_up_m100">
+                        <div class="detail detail_m" style="color:black;float:left"><t key="front.previousState.animals" default=""/>
+                      </div>
+                      <div class="last_session" style="color:#EC6608;">
+                        #{@last_cant}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+            </div>
+          </div>
+        </a>
+      <% else %>
+        <a href="#{@link}">
+          <div class="boxLarge boxLarge1" style="border: 2px solid #EC6608;">
+            <div class="padi1">
+              <div class="textMedium" style="color:black;padding:0px 0px 5px 0px"><t key="front.currentState.animals" default=""/>
+                <div class="padi_up15 padi_up_m100">
+                  <div class="textLarge textLarge1" style="color:#EC6608;text-align:center">
+                      #{@cant}
+                      <div class="padi_up25 padi_up_m100">
+                        <div class="detail detail_m" style="color:black;float:left"><t key="front.previousState.animals" default=""/>
+                        </div>
+                        <div class="last_session" style="color:#84A225">
+                          #{@last_cant}
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>  
+            </div>
+          </div>
+        </a>
+      <% end %>
+
+      <div class="mobilClear"/>
+      <div class="padi_up_m50"/>
+
+      <% if @animal_minute.to_f > @last_animal_min.to_f or @animal_minute.to_f == @last_animal_min.to_f %>        
+        <a href="#{@link}">
+          <div class="boxLarge boxLarge1" style="border: 2px solid #84A225;">
+            <div class="padi1">
+              <div class="textMedium" style="color:black;padding:0px 0px 5px 0px"><t key="front.currentState.time_animal" default=""/>
+                <div class="padi_up15 padi_up_m100">
+                  <div class="textLarge textLarge1" style="color:#84A225;text-align:center">
+                      #{@duration_minute}
+                      <div class="padi_up25 padi_up_m100">
+                        <div class="detail detail_m" style="color:black;float:left"><t key="front.previousState.time_animal" default=""/>
+                        </div>
+                        <div class="last_session" style="color:#EC6608">
+                          #{@last_animal_minute}
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>  
+            </div>
+          </div>
+        </a>
+      <% else %>
+        <a href="#{@link}">
+          <div class="boxLarge boxLarge1" style="border: 2px solid #EC6608;">
+            <div class="padi1">
+              <div class="textMedium" style="color:black;padding:0px 0px 5px 0px"><t key="front.currentState.time_animal" default=""/>
+                <div class="padi_up15 padi_up_m100">
+                  <div class="textLarge textLarge1" style="color:#EC6608;text-align:center">
+                      #{@duration_minute}
+                      <div class="padi_up25 padi_up_m100">
+                        <div class="detail detail_m" style="color:black;float:left"><t key="front.previousState.time_animal" default=""/>
+                        </div>
+                        <div class="last_session" style="color:#84A225">
+                          #{@last_animal_minute}
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>  
+            </div>
+          </div>
+        </a>
+      <% end %>
+      
+      <div class="mobilClear"/>
+      <div class="padi_up_m50"/>
+      <div class="clean"/>
+      <br/>
+
+      <% if @total > @last_total or @total == @last_total %>
+        <a href="#{@link}">
+          <div class="boxLarge boxLarge1" style="border: 2px solid #84A225;">
+            <div class="padi1">
+              <div class="textMedium" style="color:black;padding:0px 0px 5px 0px"><t key="front.currentState.total" default=""/>
+                <div class="padi_up15 padi_up_m100">
+                  <div class="textLarge textLarge1" style="color:#84A225;text-align:center">
+                      #{@total}
+                      <div class="padi_up25 padi_up_m100">
+                        <div class="detail detail_m" style="color:black;float:left"><t key="front.previousState.total" default=""/>
+                        </div>
+                        <div class="last_session" style="color:#EC6608">
+                            #{@last_total}
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      <% else %>
+        <a href="#{@link}">
+          <div class="boxLarge boxLarge1" style="border: 2px solid #EC6608;">
+            <div class="padi1">
+              <div class="textMedium" style="color:black;padding:0px 0px 5px 0px"><t key="front.currentState.total" default=""/>
+                <div class="padi_up15 padi_up_m100">
+                  <div class="textLarge textLarge1" style="color:#EC6608;text-align:center">
+                      #{@total}
+                      <div class="padi_up25 padi_up_m100">
+                        <div class="detail detail_m" style="color:black;float:left"><t key="front.previousState.total" default=""/>
+                        </div>
+                        <div class="last_session" style="color:#84A225">
+                            #{@last_total}
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      <% end %>
+
+      <div class="mobilClear"/>
+      <div class="padi_up_m50"/>
+
+      <% if @average > @last_average or @average == @last_average %>
+        <a href="#{@link}">
+          <div class="boxLarge boxLarge1" style="border: 2px solid #84A225;">
+            <div class="padi1">
+              <div class="textMedium" style="color:black;padding:0px 0px 5px 0px"><t key="front.currentState.avg" default=""/>
+                <div class="padi_up15 padi_up_m100">
+                  <div class="textLarge textLarge1" style="color:#84A225;text-align:center">
+                      #{@average}
+                      <div class="padi_up25 padi_up_m100">
+                        <div class="detail detail_m" style="color:black;float:left"><t key="front.previousState.avg" default=""/>
+                        </div>
+                        <div class="last_session" style="color:#EC6608">
+                          #{@last_average}
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      <% else %>
+        <a href="#{@link}">
+          <div class="boxLarge boxLarge1" style="border: 2px solid #EC6608;">
+            <div class="padi1">
+              <div class="textMedium" style="color:black;padding:0px 0px 5px 0px"><t key="front.currentState.avg" default=""/>
+                <div class="padi_up15 padi_up_m100">
+                  <div class="textLarge textLarge1" style="color:#EC6608;text-align:center">
+                      #{@average}
+                      <div class="padi_up25 padi_up_m100">
+                        <div class="detail detail_m" style="color:black;float:left"><t key="front.previousState.avg" default=""/>
+                        </div>
+                        <div class="last_session" style="color:#84A225">
+                          #{@last_average}
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      <% end %>
+      <div class="mobilClear"/>
+      <%
+    end%>
+
+      <div class="clean"/>
+      <br/>
+      <div class="separator"><t key="front.separator" default="Milking Machine Meters"/></div>
+      <br/>
+
+      <% MilkingMachine.all.each do |m|
+          @dit = MilkingMachineRead.where("meter = ?", m.number).last
+            url =""
+              unless @dit == nil         
+                if (@dit.eartag > 0)
+                  @animal = Animal.where("rp_number = ?", @dit.eartag).last          
+                  
+                      url_1 = "/animal_milkings/graphic?animalmilking="+@dit.milking_current.to_s
+                      unless @animal == nil                     
+                        url_2 = "&id_animal="+@animal.id.to_s   
+                      else
+                        url_2 = ""
+                      end
+                       url = url_1 + url_2
+                      else
+                        url = ""
+                      end
+              end%>
+
+        <a href="#{ url }">                        
+            <div class='milker-panel-container'>
+              <div class='puerta cerrado' id='puerta-entrada'></div>
+              <div class='milker-panel'>
+                <div class='milker-reporter'>
+                  <table class='table-condensed'>
+                    <tr id='one'>
+                      <td id='one'><t key="front.meter.number" default="Number"/></td>
+                      <td class='milker-number' id='one'>
+                        <%=m.number%>
+                      </td>
+                    </tr>
+                  </table>
+                   <div class='display'>
+                      <div class='milker-status stand-by'>Stand by</div>
+                   </div>
+                    <table class='table-condensed' id='one'>
+                      <tr id='one'>
+                        <td id='one'>kg</td>
+                        <td class='milking-volu' id='one'>-</td>
+                      </tr>
+                      <tr id='one'>
+                        <td id='one'><t key="front.meter.temperature" default="Temperature" /></td>
+                        <td class='milking-temp' id='one'>-</td>
+                      </tr>
+                      <tr id='one'>
+                        <td id='one'>Mastitis</td>
+                        <td class='milking-cond' id='one'>-</td>
+                      </tr>
+                        <tr id='one'>
+                        <td id='one'><t key="front.meter.eartag" default="Eartag" /></td>
+                        <td class='cow-eartag' id='one'>-</td>
+                      </tr>
+                  </table>
+                </div>
+              </div>
+              <div class='puerta cerrado' id='puerta-salida'></div>
+              <br/>
+              </div>
+            </a>
+         <% end %>    
+
+         <script>
+            //<![CDATA[
+              document.getElementById('navbar-home').className='active'
+              setInterval("update_milkers()",2000);
+              var puertas = document.getElementsByClassName('puerta');
+              for(var p = 0; p < puertas.length; p++){
+                puertas[p].style.display='none';
+              }
+            //]]>
+        </script>
+    </section>
+  </content:>
+</page>

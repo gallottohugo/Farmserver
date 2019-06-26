@@ -1,0 +1,19 @@
+<page>
+  <body: class="show-page weighing" />
+
+  <content-body: style="margin:0px 0px 0px 5px;">
+  
+	     <div style="float:left;padding:10px;width:200px;">
+	      <% @rndfile = params[:rndfile]   %>
+	      <center>
+	       <a href="/tmp/exp/weighing_history_#{@eartag}_#{@rndfile}.xls">
+	        <div class="containerImg img-exel">
+            </div>
+	        <p>
+              <t key="weighing.exportExel.download" default="Click here to download your Excel file."/>
+		     </p>
+	       </a>
+	      </center>
+	     </div>
+  </content-body:>
+</page>

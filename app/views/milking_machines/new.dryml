@@ -1,0 +1,23 @@
+<page title="#{ht 'milking_machine.new.title', :default=>[' New Milking machine'] }">
+	<body: class="new-page milking-machine"/>
+
+	<content-header:>
+	  <h2 class="heading">
+	    <ht key="milking_machine.new.heading">
+	      New Milking machine
+	    </ht>
+	  </h2>
+	</content-header:>
+
+	<content-body:>
+	  <form class="default" style="color:black">
+	  	<field-list fields="number" >
+	  		<number-label>
+	  		</number-label>
+	  		<number-view>
+	  		</number-view>
+	  	</field-list>
+	    <submit: label="#{ht 'milking_machine.actions.create', :default=>['Create']}"/>
+	  </form>
+	</content-body:>
+</page>
