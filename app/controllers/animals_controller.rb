@@ -1,14 +1,11 @@
 # encoding: UTF-8
 class AnimalsController < ApplicationController
-
   hobo_model_controller
 
-  
   auto_actions :all
-  index_action  :table, :index_inactive
+  index_action :table, :index_inactive
 
   autocomplete 
-
 
   def index
     @tambero_api = TamberoApi.first   
@@ -53,14 +50,10 @@ class AnimalsController < ApplicationController
     end
   end
 
-def index_inactive
-  @tambero_api = TamberoApi.first
-  @animals = Animal.find_by_sql("select * from animals where inactivated_at IS NOT NULL order by rp_number").paginate(:page => params[:page], :per_page => 30)
-end
-
-  
-
-
+  def index_inactive
+    @tambero_api = TamberoApi.first
+    @animals = Animal.find_by_sql("select * from animals where inactivated_at IS NOT NULL order by rp_number").paginate(:page => params[:page], :per_page => 30)
+  end
 end
 
 
